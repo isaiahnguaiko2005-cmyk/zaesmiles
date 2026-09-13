@@ -28,10 +28,13 @@ can pick up without re-deriving context.
 
 ## Tech stack & where things live
 
-- **Local project folder**: `C:\Users\Admin\Desktop\ZaeSmiles`
-- **Not a git repo.** No version control safety net — deploys go straight
-  from local folder to Vercel. Worth suggesting `git init` + GitHub remote;
-  raised once with the user, never followed through.
+- **Git repo, pushed to GitHub**: https://github.com/isaiahnguaiko2005-cmyk/zaesmiles
+  (`master` branch, no open PRs). `.gitignore` excludes `node_modules`,
+  `.next`, `.vercel`, `.env*`. This has been worked on from two laptops
+  (originally `C:\Users\Admin\Desktop\ZaeSmiles`, now also
+  `C:\Users\isaia\zaesmiles`) — always `git pull` before starting work and
+  push when done so the two don't silently diverge again like they did
+  before this was on GitHub.
 - **Next.js 14 (App Router)** + Tailwind CSS, TypeScript.
 - **Deployed via Vercel CLI** (not GitHub-connected). Project:
   `unmonitored/zaesmiles`. Vercel account: `isaiahnguaiko2005-2428`.
@@ -200,5 +203,4 @@ never resolved, in case one of those is where they want to pick back up.
   know," not scoped or built.
 - Per-guide cover images on Free Guides cards — blocked on the user
   producing real image assets, don't fabricate placeholder art.
-- Getting the project into git/GitHub for version safety.
 - Real pricing for the Media Kit "What I Offer" section.
