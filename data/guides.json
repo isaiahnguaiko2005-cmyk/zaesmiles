@@ -1,0 +1,82 @@
+[
+  {
+    "id": "unmonitored-chapter-1",
+    "title": "UNMONITORED — Chapter 1",
+    "description": "The first chapter of UNMONITORED, free. Why your social brain breaks under self-monitoring, and why it's a calibration problem, not a personality trait.",
+    "category": "Free Chapter",
+    "link": "https://bit.ly/UnmonitoredChapter1V2",
+    "linkLabel": "Download Free",
+    "codeword": "CHAPTER",
+    "dateAdded": "2026-06-10",
+    "leadsTo": "UNMONITORED",
+    "keywords": ["chapter", "free chapter", "book", "calibration", "self-monitoring", "working memory", "amygdala", "why social anxiety", "nervous system"]
+  },
+  {
+    "id": "solo-date-protocol",
+    "title": "The Solo Date Protocol",
+    "description": "A 5-date exposure system for social anxiety. Each date targets a specific piece of what anxiety takes from you. Do them in order.",
+    "category": "Exposure Therapy",
+    "link": "https://bit.ly/4gvf2eZ",
+    "linkLabel": "Download Free",
+    "codeword": "SOLO",
+    "dateAdded": "2026-06-19",
+    "keywords": ["solo", "solo date", "exposure", "coffee shop", "restaurant alone", "museum", "visibility", "practice", "desensitization", "being alone"]
+  },
+  {
+    "id": "three-second-door",
+    "title": "The 3-Second Door",
+    "description": "The neuroscience of hesitation, and 6 moves that close the gap before fear finishes its sentence.",
+    "category": "Social Anxiety",
+    "link": "https://drive.google.com/file/d/1HJpZJNj_HA5w5fpJCP6hWGOFg46aWcg-/view?usp=sharing",
+    "linkLabel": "Download Free",
+    "codeword": "DOOR",
+    "dateAdded": "2026-06-24",
+    "keywords": ["door", "3 second", "three second", "hesitation", "freeze", "approach", "action", "courage", "overthinking", "initiative", "taking action"]
+  },
+  {
+    "id": "date-night-psychology-guide",
+    "title": "Date Night Psychology Guide",
+    "description": "15 research-backed principles for before, during, and after a date that actually reduce the anxiety.",
+    "category": "Dating Psychology",
+    "link": "https://drive.google.com/file/d/14_xinJQFO54zAt-u6ih2xE6rAZqHwIqx/view?usp=sharing",
+    "linkLabel": "Download Free",
+    "codeword": "DATE",
+    "dateAdded": "2026-06-20",
+    "keywords": ["date", "dating", "first date", "date night", "romance", "nerves", "dating anxiety", "relationships"]
+  },
+  {
+    "id": "fifteen-psychology-hacks",
+    "title": "15 Psychology Hacks",
+    "description": "The psychology of connection, trust, and social ease. Actual mechanisms with actual application, not motivational theory.",
+    "category": "Social Psychology",
+    "link": "https://bit.ly/3RGUbLj",
+    "linkLabel": "Download Free",
+    "codeword": "SOCIAL ANXIETY",
+    "dateAdded": "2026-05-23",
+    "popular": true,
+    "keywords": ["social anxiety", "psychology hacks", "connection", "trust", "social ease", "principles", "mechanisms", "perception", "being liked", "likability", "likable", "first impressions", "charisma", "warmth", "familiarity", "magnetic", "social skills"]
+  },
+  {
+    "id": "the-mitch-effect",
+    "title": "The Mitch Effect",
+    "description": "The 5-move social formula for starting conversations, making people comfortable, and turning small talk into connection: Open, Hold, Pivot, Spark, Bridge. Built on the research behind why naming the unmonitored version of you actually works.",
+    "category": "Behavioral Psychology",
+    "link": "https://drive.google.com/file/d/1q8mP5kMepsgSYg8Ay0lNjye1uUa4LTZ9/view?usp=drive_link",
+    "linkLabel": "Download Free",
+    "codeword": "MITCH",
+    "dateAdded": "2026-08-07",
+    "leadsTo": "The Mitch Protocol",
+    "keywords": ["mitch", "mitch effect", "naming", "self-distancing", "batman effect", "third person", "distance", "confidence", "exemplar effect", "spotlight effect", "overthinking", "monitoring", "open", "hold", "pivot", "spark", "bridge", "conversation formula", "starting conversations", "small talk", "conversation starters"]
+  },
+  {
+    "id": "the-acceptance-premise",
+    "title": "The Acceptance Premise",
+    "description": "Why the people most afraid of rejection are the ones who quietly cause it, and the one shift that breaks the loop. Built on Danu Stinson's research on expectation and warmth.",
+    "category": "Behavioral Psychology",
+    "link": "https://drive.google.com/file/d/1mBOZ_BEg_pMtvMVp90jaI-kulARG0ekA/view?usp=drive_link",
+    "linkLabel": "Download Free",
+    "codeword": "PREMISE",
+    "dateAdded": "2026-07-10",
+    "keywords": ["acceptance", "rejection", "rejection sensitivity", "self-fulfilling prophecy", "warmth", "expectation", "stinson", "bracing", "anxious attachment", "avoidant attachment", "secure attachment", "ambiguity", "premise swap", "expressed liking", "approach anxiety", "group entry"]
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "the-mitch-protocol",
+    "title": "The Mitch Protocol",
+    "premium": true,
+    "description": "You know the freeze. Rehearsing the sentence before you say it, replaying it at 2am after. This is the system that shuts the self-monitoring off in the exact moments it spikes hardest: the person you're into, the group you go quiet in, the room full of strangers. Five real conversations broken down move by move, plus the research behind why it works.",
+    "category": "Conversational System",
+    "price": "$2.99",
+    "link": "https://isaiah60.gumroad.com/l/mitch-protocol",
+    "linkLabel": "Get The Mitch Protocol",
+    "discount": {
+      "discountedPrice": "$1.50",
+      "endsAt": "2026-07-10T23:59:59-04:00",
+      "label": "50% Off"
+    },
+    "proof": [
+      {
+        "text": "Kids who did a hard task as \"Batman\" focused longer and performed better than kids who did it as themselves.",
+        "source": "White & Carlson, the exemplar effect"
+      },
+      {
+        "text": "Coaching yourself with your own name instead of \"I\" improves clarity and lowers stress reactivity in under a second.",
+        "source": "Ethan Kross, University of Michigan"
+      },
+      {
+        "text": "Pre-set if-then plans roughly tripled follow-through across 94 studies.",
+        "source": "Peter Gollwitzer, NYU"
+      },
+      {
+        "text": "People feel a spotlight about twice as bright as the one actually on them.",
+        "source": "Gilovich et al., Cornell"
+      }
+    ]
+  }
+]

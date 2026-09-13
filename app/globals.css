@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0C0F14;
+  --ink2: #141820;
+  --cream: #F5F0E8;
+  --cream2: #EDE8DC;
+  --gold: #C4A06A;
+  --sage: #8A9E8C;
+  --white: #FFFFFF;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.story-link {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+}
+
+.story-link::after {
+  content: "";
+  background-color: var(--gold);
+  width: 100%;
+  height: 1.5px;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  transform-origin: 100% 100%;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-out;
+}
+
+.story-link:hover::after {
+  transform-origin: 0 100%;
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: var(--ink);
+  color: var(--cream);
+  font-family: 'Outfit', sans-serif;
+}
+
+@keyframes progressFill {
+  from { width: 0%; }
+}
+
+.progress-fill {
+  animation: progressFill 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-fill { animation: none; }
+}
+
+@keyframes hologramPop {
+  0% { opacity: 0; transform: translateY(50px) scale(0.82); }
+  60% { opacity: 1; transform: translateY(-8px) scale(1.03); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.hologram-pop {
+  opacity: 0;
+}
+
+.hologram-visible {
+  animation: hologramPop 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes hologramFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.hologram-float {
+  animation: hologramFloat 4.5s ease-in-out infinite;
+}
+
+@keyframes hologramFlicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.7; }
+  94% { opacity: 1; }
+  96% { opacity: 0.82; }
+  97% { opacity: 1; }
+}
+
+.hologram-flicker {
+  animation: hologramFlicker 5s ease-in-out infinite;
+}
+
+@keyframes hologramScan {
+  0% { transform: translateY(-110%); }
+  100% { transform: translateY(110%); }
+}
+
+.hologram-scanline {
+  animation: hologramScan 2.8s linear infinite;
+}
+
+@keyframes hologramRingPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.06); }
+}
+
+.hologram-ring {
+  animation: hologramRingPulse 3s ease-in-out infinite;
+}
+
+@keyframes premiumBloom {
+  0%, 100% { box-shadow: 0 0 30px rgba(196,160,106,0.12), 0 0 60px rgba(196,160,106,0.06); }
+  50% { box-shadow: 0 0 40px rgba(196,160,106,0.22), 0 0 80px rgba(196,160,106,0.1); }
+}
+
+.premium-glow {
+  animation: premiumBloom 4s ease-in-out infinite;
+}

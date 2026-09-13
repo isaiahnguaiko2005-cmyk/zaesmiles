@@ -1,0 +1,344 @@
+"use client";
+
+const partners = ["OLOV Trimmer", "Based Bodyworks", "Crispy Halal", "Rimbério"];
+
+const stats = [
+  { value: "12.2K+", label: "Combined Followers" },
+  { value: "9.8M+", label: "Views, Last 30 Days" },
+  { value: "13%", label: "IG Engagement Rate" },
+  { value: "25%*", label: "TikTok Engagement Rate" },
+];
+
+const ageBreakdown = [
+  { label: "13-17", pct: 19.2 },
+  { label: "18-24", pct: 40.5 },
+  { label: "25-34", pct: 29.7 },
+  { label: "35-44", pct: 6.0 },
+  { label: "45+", pct: 4.6 },
+];
+
+const genderBreakdown = [
+  { platform: "Instagram", male: 82.2, female: 17.8 },
+  { platform: "TikTok", male: 72, female: 28 },
+];
+
+const topCountries = [
+  { label: "United States", pct: 55.5 },
+  { label: "United Kingdom", pct: 5.7 },
+  { label: "India", pct: 4.4 },
+  { label: "Philippines", pct: 1.8 },
+  { label: "Canada", pct: 1.2 },
+];
+
+const offers = [
+  {
+    title: "Sponsored Reel / TikTok",
+    description: "One story-driven video, cross-posted to Instagram and TikTok.",
+  },
+  {
+    title: "Story / Feed Feature",
+    description: "A dedicated feature placement across Stories or the main feed.",
+  },
+  {
+    title: "Link in Bio Placement",
+    description: "Your link featured in bio across platforms for an agreed window.",
+  },
+  {
+    title: "Product Collab / UGC",
+    description: "Raw or edited content built around your product, for you to repost or run as ads.",
+  },
+];
+
+const whyWorkWithMe = [
+  "13%+ engagement rate on Instagram, well above the typical creator benchmark",
+  "Evergreen self-improvement content that keeps earning views months after posting",
+  "A documented growth story via Project 300K — a public, verifiable audience-building process",
+  "Research-backed content voice, not generic motivational filler",
+  "Fast turnaround and direct communication, no agency layer",
+];
+
+function Bar({ label, pct, color = "var(--gold)" }: { label: string; pct: number; color?: string }) {
+  return (
+    <div className="mb-4">
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="font-outfit text-sm" style={{ color: "var(--ink)" }}>
+          {label}
+        </span>
+        <span className="font-outfit text-sm font-medium" style={{ color: "var(--ink)" }}>
+          {pct}%
+        </span>
+      </div>
+      <div
+        className="w-full h-2 rounded-full overflow-hidden"
+        style={{ backgroundColor: "rgba(12,15,20,0.08)" }}
+      >
+        <div
+          className="h-full rounded-full transition-all duration-700 ease-out"
+          style={{ width: `${pct}%`, backgroundColor: color }}
+        />
+      </div>
+    </div>
+  );
+}
+
+export default function MediaKit() {
+  return (
+    <section className="py-24 lg:py-32" style={{ backgroundColor: "var(--cream)" }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-12">
+        {/* Header */}
+        <span
+          className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
+          style={{ color: "var(--gold)" }}
+        >
+          Media Kit
+        </span>
+        <h1
+          className="font-cormorant font-semibold text-3xl lg:text-5xl mb-4"
+          style={{ color: "var(--ink)" }}
+        >
+          Partner With Mitch
+        </h1>
+        <p
+          className="font-outfit font-light leading-relaxed mb-14 max-w-2xl"
+          style={{ color: "rgba(12,15,20,0.6)", fontSize: "1.0625rem" }}
+        >
+          I create research-backed short-form content on social anxiety, dating
+          psychology, and conversation, for an engaged, mostly 18-34 audience
+          that actually watches, shares, and comes back.
+        </p>
+
+        {/* Stats grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="p-6 text-center transition-transform duration-200 hover:-translate-y-1"
+              style={{ backgroundColor: "var(--ink)", border: "1px solid rgba(196,160,106,0.3)" }}
+            >
+              <div
+                className="font-cormorant font-semibold mb-1"
+                style={{ color: "var(--gold)", fontSize: "2rem" }}
+              >
+                {stat.value}
+              </div>
+              <div
+                className="font-outfit text-xs uppercase tracking-widest"
+                style={{ color: "rgba(245,240,232,0.6)" }}
+              >
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p
+          className="font-outfit text-xs mb-16 -mt-10"
+          style={{ color: "rgba(12,15,20,0.4)" }}
+        >
+          *TikTok engagement rate reflects the last 30 days, including one viral
+          post. Typical days run lower — happy to share the breakdown on request.
+        </p>
+
+        {/* Audience */}
+        <h2
+          className="font-cormorant font-semibold text-2xl lg:text-3xl mb-8"
+          style={{ color: "var(--ink)" }}
+        >
+          Audience
+        </h2>
+        <div className="grid lg:grid-cols-3 gap-10 mb-20">
+          <div>
+            <span
+              className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
+              style={{ color: "var(--sage)" }}
+            >
+              Age (Instagram)
+            </span>
+            {ageBreakdown.map((a) => (
+              <Bar key={a.label} label={a.label} pct={a.pct} />
+            ))}
+          </div>
+          <div>
+            <span
+              className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
+              style={{ color: "var(--sage)" }}
+            >
+              Gender
+            </span>
+            {genderBreakdown.map((g) => (
+              <div key={g.platform} className="mb-5">
+                <div
+                  className="font-outfit text-xs font-medium mb-2"
+                  style={{ color: "rgba(12,15,20,0.5)" }}
+                >
+                  {g.platform}
+                </div>
+                <Bar label="Men" pct={g.male} />
+                <Bar label="Women" pct={g.female} color="var(--sage)" />
+              </div>
+            ))}
+          </div>
+          <div>
+            <span
+              className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
+              style={{ color: "var(--sage)" }}
+            >
+              Top Countries
+            </span>
+            {topCountries.map((c) => (
+              <Bar key={c.label} label={c.label} pct={c.pct} color="var(--sage)" />
+            ))}
+          </div>
+        </div>
+
+        {/* What I offer */}
+        <h2
+          className="font-cormorant font-semibold text-2xl lg:text-3xl mb-8"
+          style={{ color: "var(--ink)" }}
+        >
+          What I Offer
+        </h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+          {offers.map((offer) => (
+            <div
+              key={offer.title}
+              className="p-6 transition-transform duration-200 hover:-translate-y-1"
+              style={{ backgroundColor: "var(--ink)", border: "1px solid rgba(196,160,106,0.25)" }}
+            >
+              <h3
+                className="font-cormorant font-semibold text-lg mb-2"
+                style={{ color: "var(--cream)" }}
+              >
+                {offer.title}
+              </h3>
+              <p
+                className="font-outfit font-light text-sm leading-relaxed"
+                style={{ color: "rgba(245,240,232,0.6)" }}
+              >
+                {offer.description}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p
+          className="font-outfit text-sm mb-20 -mt-14"
+          style={{ color: "rgba(12,15,20,0.5)" }}
+        >
+          Rates depend on scope and usage rights &mdash; reach out for a quote.
+        </p>
+
+        {/* Why work with me */}
+        <h2
+          className="font-cormorant font-semibold text-2xl lg:text-3xl mb-8"
+          style={{ color: "var(--ink)" }}
+        >
+          Why Brands Work With Me
+        </h2>
+        <ul className="grid sm:grid-cols-2 gap-4 mb-20">
+          {whyWorkWithMe.map((point) => (
+            <li
+              key={point}
+              className="flex items-start gap-3 font-outfit font-light text-sm leading-relaxed"
+              style={{ color: "var(--ink)" }}
+            >
+              <span style={{ color: "var(--gold)" }} aria-hidden="true">
+                &#10003;
+              </span>
+              {point}
+            </li>
+          ))}
+        </ul>
+
+        {/* Partners + portfolio */}
+        <div className="flex flex-wrap gap-3 mb-8">
+          {partners.map((partner) => (
+            <div
+              key={partner}
+              className="font-outfit text-sm font-medium px-4 py-2"
+              style={{
+                backgroundColor: "var(--ink)",
+                color: "var(--cream)",
+                border: "1px solid var(--gold)",
+              }}
+            >
+              {partner}
+            </div>
+          ))}
+        </div>
+
+        <div
+          className="p-8 lg:p-10 mb-8"
+          style={{ backgroundColor: "var(--ink2)", border: "1px solid var(--gold)" }}
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            <div>
+              <span
+                className="font-outfit text-xs uppercase tracking-widest font-medium block mb-3"
+                style={{ color: "var(--gold)" }}
+              >
+                UGC Portfolio
+              </span>
+              <p className="font-outfit font-light" style={{ color: "rgba(245,240,232,0.7)" }}>
+                View past brand work, content formats, and results.
+              </p>
+            </div>
+            <a
+              href="https://canva.link/cqq4b3dqwf0xrzm"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97] focus:outline-none flex-shrink-0"
+              style={{
+                border: "1px solid var(--gold)",
+                color: "var(--cream)",
+                padding: "14px 28px",
+                minHeight: "48px",
+              }}
+              aria-label="View UGC Portfolio — opens in new tab"
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = "var(--gold)";
+                (e.currentTarget as HTMLElement).style.color = "var(--ink)";
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(196,160,106,0.35)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
+                (e.currentTarget as HTMLElement).style.color = "var(--cream)";
+                (e.currentTarget as HTMLElement).style.boxShadow = "none";
+              }}
+            >
+              View Portfolio &rarr;
+            </a>
+          </div>
+        </div>
+
+        {/* Email */}
+        <div
+          className="p-10 lg:p-12 text-center"
+          style={{ border: "1px solid var(--gold)", backgroundColor: "var(--ink)" }}
+        >
+          <span
+            className="font-outfit text-xs uppercase tracking-widest font-medium block mb-6"
+            style={{ color: "var(--gold)" }}
+          >
+            Business Email
+          </span>
+          <a
+            href="mailto:isaiahnguaiko6@gmail.com"
+            className="font-cormorant font-semibold block transition-colors focus:outline-none"
+            style={{ color: "var(--cream)", fontSize: "clamp(1.35rem, 3.5vw, 2rem)" }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--gold)")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--cream)")}
+          >
+            isaiahnguaiko6@gmail.com
+          </a>
+          <div className="mt-6 space-y-1">
+            <p className="font-outfit font-light text-sm" style={{ color: "rgba(245,240,232,0.45)" }}>
+              For brand partnerships, coaching inquiries, and collaborations.
+            </p>
+            <p className="font-outfit font-light text-sm" style={{ color: "rgba(245,240,232,0.35)" }}>
+              Response within 48 hours.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
