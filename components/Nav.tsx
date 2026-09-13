@@ -26,44 +26,66 @@ export default function Nav() {
         borderBottom: "1px solid rgba(196,160,106,0.15)",
       }}
     >
-      {/* Logo */}
-      <Link
-        href="/"
-        className="font-cormorant text-xl font-medium tracking-widest uppercase"
-        style={{ color: "var(--gold)" }}
-      >
-        ZAE.SMILES
-      </Link>
-
-      {/* Desktop links */}
-      <div className="hidden lg:flex items-center gap-6">
-        {LINKS.map((item) => (
-          <Link
-            key={item.label}
-            href={item.href}
-            className="font-outfit text-sm font-medium tracking-wide transition-colors hover:text-gold"
-            style={{ color: "rgba(245,240,232,0.7)" }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.color = "var(--gold)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.color = "rgba(245,240,232,0.7)")
-            }
-          >
-            {item.label}
-          </Link>
-        ))}
-        <a
-          href="https://discord.gg/vWhm6srVqz"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Join Discord"
-          className="transition-opacity hover:opacity-70"
-          style={{ color: "var(--cream)" }}
+      {/* Logo + desktop links, grouped left so the header doesn't read as two
+          islands with a dead gap between them */}
+      <div className="flex items-center gap-10">
+        <Link
+          href="/"
+          className="font-cormorant text-xl font-medium tracking-widest uppercase flex-shrink-0"
+          style={{ color: "var(--gold)" }}
         >
-          <DiscordIcon />
-        </a>
+          ZAE.SMILES
+        </Link>
+
+        <div className="hidden lg:flex items-center gap-6">
+          {LINKS.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="font-outfit text-sm font-medium tracking-wide transition-colors hover:text-gold"
+              style={{ color: "rgba(245,240,232,0.7)" }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--gold)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "rgba(245,240,232,0.7)")
+              }
+            >
+              {item.label}
+            </Link>
+          ))}
+          <a
+            href="https://discord.gg/vWhm6srVqz"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Join Discord"
+            className="transition-opacity hover:opacity-70"
+            style={{ color: "var(--cream)" }}
+          >
+            <DiscordIcon />
+          </a>
+        </div>
       </div>
+
+      {/* CTA — anchors the right edge so the header reads as one balanced
+          bar instead of a logo and a link cluster floating apart */}
+      <Link
+        href="/guides"
+        className="hidden lg:inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97] flex-shrink-0"
+        style={{
+          backgroundColor: "var(--gold)",
+          color: "var(--ink)",
+          padding: "10px 22px",
+        }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 18px rgba(196,160,106,0.35)";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLElement).style.boxShadow = "none";
+        }}
+      >
+        Free Guides
+      </Link>
 
       {/* Mobile hamburger */}
       <button

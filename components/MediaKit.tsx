@@ -2,11 +2,11 @@
 
 const partners = ["OLOV Trimmer", "Based Bodyworks", "Crispy Halal", "Rimbério"];
 
-const stats = [
-  { value: "12.2K+", label: "Combined Followers" },
-  { value: "9.8M+", label: "Views, Last 30 Days" },
-  { value: "13%", label: "IG Engagement Rate" },
-  { value: "25%*", label: "TikTok Engagement Rate" },
+const stats: { value: string; label: string; icon: "people" | "eye" | "heart" | "trending" }[] = [
+  { value: "12.2K+", label: "Combined Followers", icon: "people" },
+  { value: "9.8M+", label: "Views, Last 30 Days", icon: "eye" },
+  { value: "13%", label: "IG Engagement Rate", icon: "heart" },
+  { value: "25%*", label: "TikTok Engagement Rate", icon: "trending" },
 ];
 
 const ageBreakdown = [
@@ -56,6 +56,41 @@ const whyWorkWithMe = [
   "Research-backed content voice, not generic motivational filler",
   "Fast turnaround and direct communication, no agency layer",
 ];
+
+function StatIcon({ kind }: { kind: "people" | "eye" | "heart" | "trending" }) {
+  const common = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
+  switch (kind) {
+    case "people":
+      return (
+        <svg {...common}>
+          <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      );
+    case "eye":
+      return (
+        <svg {...common}>
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      );
+    case "heart":
+      return (
+        <svg {...common}>
+          <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" />
+        </svg>
+      );
+    case "trending":
+      return (
+        <svg {...common}>
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+          <polyline points="17 6 23 6 23 12" />
+        </svg>
+      );
+  }
+}
 
 function Bar({ label, pct, color = "var(--gold)" }: { label: string; pct: number; color?: string }) {
   return (
@@ -107,6 +142,50 @@ export default function MediaKit() {
           that actually watches, shares, and comes back.
         </p>
 
+        {/* Hero CTA pair */}
+        <div className="flex flex-wrap gap-4 mb-16">
+          <a
+            href="mailto:isaiahnguaiko6@gmail.com"
+            className="inline-flex items-center justify-center gap-2 font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
+            style={{
+              backgroundColor: "var(--ink)",
+              color: "var(--cream)",
+              padding: "14px 28px",
+              minHeight: "48px",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(12,15,20,0.25)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.boxShadow = "none";
+            }}
+          >
+            Get in Touch &rarr;
+          </a>
+          <a
+            href="https://canva.link/cqq4b3dqwf0xrzm"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
+            style={{
+              border: "1px solid var(--ink)",
+              color: "var(--ink)",
+              padding: "14px 28px",
+              minHeight: "48px",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor = "var(--ink)";
+              (e.currentTarget as HTMLElement).style.color = "var(--cream)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
+              (e.currentTarget as HTMLElement).style.color = "var(--ink)";
+            }}
+          >
+            View Portfolio
+          </a>
+        </div>
+
         {/* Stats grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
           {stats.map((stat) => (
@@ -115,6 +194,9 @@ export default function MediaKit() {
               className="p-6 text-center transition-transform duration-200 hover:-translate-y-1"
               style={{ backgroundColor: "var(--ink)", border: "1px solid rgba(196,160,106,0.3)" }}
             >
+              <div className="flex justify-center mb-3" style={{ color: "var(--gold)" }}>
+                <StatIcon kind={stat.icon} />
+              </div>
               <div
                 className="font-cormorant font-semibold mb-1"
                 style={{ color: "var(--gold)", fontSize: "2rem" }}
@@ -227,26 +309,31 @@ export default function MediaKit() {
         </p>
 
         {/* Why work with me */}
-        <h2
-          className="font-cormorant font-semibold text-2xl lg:text-3xl mb-8"
-          style={{ color: "var(--ink)" }}
+        <div
+          className="p-8 lg:p-10 mb-20"
+          style={{ backgroundColor: "var(--cream2)", border: "1px solid rgba(12,15,20,0.1)" }}
         >
-          Why Brands Work With Me
-        </h2>
-        <ul className="grid sm:grid-cols-2 gap-4 mb-20">
-          {whyWorkWithMe.map((point) => (
-            <li
-              key={point}
-              className="flex items-start gap-3 font-outfit font-light text-sm leading-relaxed"
-              style={{ color: "var(--ink)" }}
-            >
-              <span style={{ color: "var(--gold)" }} aria-hidden="true">
-                &#10003;
-              </span>
-              {point}
-            </li>
-          ))}
-        </ul>
+          <h2
+            className="font-cormorant font-semibold text-2xl lg:text-3xl mb-8"
+            style={{ color: "var(--ink)" }}
+          >
+            Why Brands Work With Me
+          </h2>
+          <ul className="grid sm:grid-cols-2 gap-4">
+            {whyWorkWithMe.map((point) => (
+              <li
+                key={point}
+                className="flex items-start gap-3 font-outfit font-light text-sm leading-relaxed"
+                style={{ color: "var(--ink)" }}
+              >
+                <span style={{ color: "var(--gold)" }} aria-hidden="true">
+                  &#10003;
+                </span>
+                {point}
+              </li>
+            ))}
+          </ul>
+        </div>
 
         {/* Partners + portfolio */}
         <div className="flex flex-wrap gap-3 mb-8">
