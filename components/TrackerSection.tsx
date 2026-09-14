@@ -15,7 +15,7 @@ interface StatsData {
   tiktok_delta: number;
   revenue_delta: number;
   jaguar_delta: number;
-  history?: { week: string; combined: number }[];
+  history?: { week: string; ig: number; tiktok: number; combined: number }[];
   error?: boolean;
 }
 
@@ -81,7 +81,7 @@ export default function TrackerSection() {
                   boxShadow: "0 4px 32px rgba(196,160,106,0.08)",
                 }}
               >
-                <GrowthChart history={stats.history} target={300000} />
+                <GrowthChart history={stats.history} />
               </div>
             )}
             <div className="mt-6 text-center">

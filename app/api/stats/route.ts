@@ -112,6 +112,8 @@ export async function GET() {
     const tiktokSeries = buildSeries(dataRows, 2);
     const history = dataRows.map((row, i) => ({
       week: row[0]?.trim() || String(i + 1),
+      ig: igSeries[i],
+      tiktok: tiktokSeries[i],
       combined: igSeries[i] + tiktokSeries[i],
     }));
 
