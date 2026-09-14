@@ -3,6 +3,7 @@
 import productsData from "../data/products.json";
 import { useCountdown } from "../lib/useCountdown";
 import ReviewRotator, { RotatorItem } from "./ReviewRotator";
+import Reveal from "./Reveal";
 
 type Product = {
   id: string;
@@ -98,7 +99,7 @@ export default function Products() {
         </p>
 
         {/* UNMONITORED flagship card */}
-        <div
+        <Reveal
           className="premium-glow mb-8 p-8 lg:p-12"
           style={{
             backgroundColor: "var(--ink)",
@@ -224,8 +225,8 @@ export default function Products() {
               What&apos;s inside
             </span>
             <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-10">
-              {UNMONITORED_PHASES.map((p) => (
-                <div key={p.phase} style={{ borderLeft: "2px solid rgba(196,160,106,0.4)", paddingLeft: "12px" }}>
+              {UNMONITORED_PHASES.map((p, i) => (
+                <Reveal key={p.phase} delay={i * 60} style={{ borderLeft: "2px solid rgba(196,160,106,0.4)", paddingLeft: "12px" }}>
                   <div
                     className="font-outfit text-xs uppercase tracking-widest font-medium mb-1"
                     style={{ color: "var(--gold)" }}
@@ -244,17 +245,19 @@ export default function Products() {
                   >
                     {p.description}
                   </p>
-                </div>
+                </Reveal>
               ))}
             </div>
             <ReviewRotator items={UNMONITORED_PROOF} label="Why it works" />
           </div>
-        </div>
+        </Reveal>
 
         {/* Additional paid products + coming soon */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {products.map((product, i) => (
+            <Reveal key={product.id} delay={i * 60}>
+              <ProductCard product={product} />
+            </Reveal>
           ))}
           <div
             className="p-8 flex flex-col justify-center"

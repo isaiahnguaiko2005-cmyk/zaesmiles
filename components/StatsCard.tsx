@@ -69,6 +69,19 @@ function formatDelta(n: number, format: "number" | "currency"): string {
   return formatNumber(abs);
 }
 
+function CarMarkerIcon() {
+  return (
+    <svg width="16" height="10" viewBox="0 0 24 14" fill="none" aria-hidden="true">
+      <path
+        d="M2 10.5h1.2a2.3 2.3 0 0 0 4.4 0h8.8a2.3 2.3 0 0 0 4.4 0H22a1 1 0 0 0 1-1V7.2a1 1 0 0 0-.4-.8l-3.1-2.3-1.3-2.3A1 1 0 0 0 17.3 1H4a1 1 0 0 0-1 1v6.5H2a1 1 0 0 0-1 1v0a1 1 0 0 0 1 1Z"
+        fill="var(--gold)"
+      />
+      <circle cx="6.6" cy="10.5" r="1.6" fill="var(--ink)" stroke="var(--gold)" />
+      <circle cx="17.4" cy="10.5" r="1.6" fill="var(--ink)" stroke="var(--gold)" />
+    </svg>
+  );
+}
+
 function StatBox({
   label,
   value,
@@ -76,6 +89,7 @@ function StatBox({
   format = "number",
   isLeader,
   target,
+  markerIcon,
 }: {
   label: string;
   value: number;
@@ -83,6 +97,7 @@ function StatBox({
   format?: "number" | "currency";
   isLeader?: boolean;
   target?: number;
+  markerIcon?: "car";
 }) {
   const animated = useCountUp(value);
   const displayValue =
@@ -95,7 +110,7 @@ function StatBox({
     target && format === "currency" ? "$" + formatNumber(target) : target ? formatNumber(target) : "";
 
   return (
-    <div className="p-4">
+    <div className="p-4 transition-transform duration-200 hover:-translate-y-0.5">
       <div className="flex items-center gap-2 mb-1">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium"
@@ -132,8 +147,8 @@ function StatBox({
       {target && (
         <div className="mt-2">
           <div
-            className="w-full h-1"
-            style={{ backgroundColor: "rgba(196,160,106,0.15)" }}
+            className="relative w-full h-1"
+            style={{ backgroundColor: "rgba(196,160,106,0.15)", marginTop: markerIcon ? "8px" : 0 }}
             role="progressbar"
             aria-valuenow={value}
             aria-valuemin={0}
@@ -144,6 +159,21 @@ function StatBox({
               className="h-full progress-fill"
               style={{ width: `${pct}%`, backgroundColor: "var(--gold)" }}
             />
+            {markerIcon === "car" && (
+              <div
+                className="absolute"
+                style={{
+                  left: `${pct}%`,
+                  bottom: "100%",
+                  transform: "translateX(-50%)",
+                  marginBottom: "1px",
+                  transition: "left 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                }}
+                aria-hidden="true"
+              >
+                <CarMarkerIcon />
+              </div>
+            )}
           </div>
           <div
             className="mt-1 font-outfit text-xs"
@@ -224,7 +254,7 @@ export default function StatsCard({
           </span>
         </div>
         <div
-          className="w-full h-1.5"
+          className="relative w-full h-1.5"
           style={{ backgroundColor: "rgba(196,160,106,0.15)" }}
           role="progressbar"
           aria-valuenow={day}
@@ -235,6 +265,34 @@ export default function StatsCard({
           <div
             className="h-full progress-fill"
             style={{ width: `${progress}%`, backgroundColor: "var(--gold)" }}
+          />
+          {/* Milestone ticks at 25/50/75% */}
+          {[25, 50, 75].map((m) => (
+            <div
+              key={m}
+              className="absolute top-0 bottom-0"
+              style={{
+                left: `${m}%`,
+                width: "1px",
+                backgroundColor: progress >= m ? "rgba(12,15,20,0.25)" : "rgba(245,240,232,0.2)",
+              }}
+              aria-hidden="true"
+            />
+          ))}
+          {/* Current-position marker with a subtle pulse */}
+          <div
+            className="absolute hologram-ring"
+            style={{
+              left: `${progress}%`,
+              top: "50%",
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              backgroundColor: "var(--gold)",
+              boxShadow: "0 0 6px 1px rgba(196,160,106,0.7)",
+              transform: "translate(-50%, -50%)",
+            }}
+            aria-hidden="true"
           />
         </div>
         <div
@@ -285,6 +343,7 @@ export default function StatsCard({
             delta={jaguarDelta}
             format="currency"
             target={JAGUAR_TARGET}
+            markerIcon="car"
           />
         </div>
       </div>

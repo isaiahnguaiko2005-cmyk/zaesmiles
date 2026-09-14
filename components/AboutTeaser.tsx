@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Reveal from "./Reveal";
 
 export default function AboutTeaser() {
   return (
     <section className="py-20 lg:py-28" style={{ backgroundColor: "var(--cream)" }}>
-      <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
+      <Reveal className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
           style={{ color: "var(--sage)" }}
@@ -23,7 +24,7 @@ export default function AboutTeaser() {
         </p>
         <Link
           href="/about"
-          className="font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2 transition-all duration-200"
+          className="story-link font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2 transition-all duration-200"
           style={{ color: "var(--gold)" }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.color = "var(--ink)";
@@ -34,7 +35,7 @@ export default function AboutTeaser() {
         >
           Read the full story &rarr;
         </Link>
-      </div>
+      </Reveal>
     </section>
   );
 }

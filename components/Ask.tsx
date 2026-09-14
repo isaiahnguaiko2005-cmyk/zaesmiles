@@ -128,7 +128,7 @@ export default function Ask() {
                     role="tab"
                     aria-selected={active}
                     onClick={() => switchMode(m)}
-                    className="flex-1 font-outfit text-sm font-medium uppercase tracking-wide transition-all focus:outline-none"
+                    className="flex-1 font-outfit text-sm font-medium uppercase tracking-wide transition-all duration-200 active:scale-[0.97] focus:outline-none"
                     style={{
                       backgroundColor: active ? "var(--gold)" : "transparent",
                       color: active ? "var(--ink)" : "rgba(245,240,232,0.6)",
@@ -245,7 +245,7 @@ export default function Ask() {
                 <button
                   type="submit"
                   disabled={status === "submitting" || question.trim().length < 3}
-                  className="w-full inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all focus:outline-none disabled:opacity-50"
+                  className="w-full inline-flex items-center justify-center gap-2 font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 active:scale-[0.97] focus:outline-none disabled:opacity-50 disabled:active:scale-100"
                   style={{
                     backgroundColor: "var(--gold)",
                     color: "var(--ink)",
@@ -261,6 +261,19 @@ export default function Ask() {
                     (e.currentTarget as HTMLElement).style.outline = "none";
                   }}
                 >
+                  {status === "submitting" && (
+                    <svg
+                      className="animate-spin"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="3" opacity="0.25" />
+                      <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                    </svg>
+                  )}
                   {status === "submitting" ? "Sending..." : copy.button}
                 </button>
               </form>

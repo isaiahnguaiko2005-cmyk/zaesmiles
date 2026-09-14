@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Reveal from "./Reveal";
 
 type Platform = {
   name: string;
@@ -89,8 +90,10 @@ export default function Socials() {
         </p>
 
         <div className="grid sm:grid-cols-2 gap-4">
-          {platforms.map((p) => (
-            <SocialCard key={p.name} platform={p} />
+          {platforms.map((p, i) => (
+            <Reveal key={p.name} delay={i * 50}>
+              <SocialCard platform={p} />
+            </Reveal>
           ))}
         </div>
       </div>

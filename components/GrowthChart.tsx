@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 interface GrowthChartProps {
   history: { week: string; ig: number; tiktok: number }[];
 }
@@ -24,6 +26,7 @@ function niceMax(n: number): number {
 }
 
 export default function GrowthChart({ history }: GrowthChartProps) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const points = history.filter((h) => h.ig > 0 || h.tiktok > 0);
   if (points.length < 2) return null;
 
@@ -42,8 +45,15 @@ export default function GrowthChart({ history }: GrowthChartProps) {
   const tiktokPath = points.map((p, i) => `${i === 0 ? "M" : "L"} ${xFor(i).toFixed(1)} ${yFor(p.tiktok).toFixed(1)}`).join(" ");
 
   const tickValues = Array.from({ length: TICKS + 1 }, (_, i) => min + ((max - min) * i) / TICKS);
-
   const formatTick = (v: number) => (v >= 1000 ? (v / 1000).toFixed(1) + "K" : Math.round(v).toString());
+  const formatFull = (v: number) => v.toLocaleString("en-US");
+
+  const active = activeIndex !== null ? points[activeIndex] : null;
+  const activeX = activeIndex !== null ? xFor(activeIndex) : 0;
+
+  // Keep tooltip from clipping off either edge of the chart.
+  const tooltipWidth = 118;
+  const tooltipX = Math.min(Math.max(activeX - tooltipWidth / 2, PAD_LEFT), WIDTH - PAD_RIGHT - tooltipWidth);
 
   return (
     <div className="px-5 pt-5 pb-4" style={{ borderBottom: "1px solid rgba(196,160,106,0.12)" }}>
@@ -68,23 +78,17 @@ export default function GrowthChart({ history }: GrowthChartProps) {
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         className="w-full"
-        style={{ height: "auto" }}
+        style={{ height: "auto", touchAction: "manipulation" }}
         role="img"
         aria-label={`Instagram followers from ${points[0].ig} to ${points[points.length - 1].ig}, TikTok followers from ${points[0].tiktok} to ${points[points.length - 1].tiktok}`}
+        onMouseLeave={() => setActiveIndex(null)}
       >
         {/* Y-axis gridlines + labels */}
         {tickValues.map((v, i) => {
           const y = yFor(v);
           return (
             <g key={i}>
-              <line
-                x1={PAD_LEFT}
-                y1={y}
-                x2={WIDTH - PAD_RIGHT}
-                y2={y}
-                stroke="rgba(196,160,106,0.12)"
-                strokeWidth="1"
-              />
+              <line x1={PAD_LEFT} y1={y} x2={WIDTH - PAD_RIGHT} y2={y} stroke="rgba(196,160,106,0.12)" strokeWidth="1" />
               <text x={PAD_LEFT - 8} y={y + 3} textAnchor="end" fontSize="9" fill="rgba(245,240,232,0.4)" fontFamily="Outfit, sans-serif">
                 {formatTick(v)}
               </text>
@@ -107,15 +111,69 @@ export default function GrowthChart({ history }: GrowthChartProps) {
           </text>
         ))}
 
+        {/* Active week vertical guide */}
+        {active && (
+          <line
+            x1={activeX}
+            y1={PAD_TOP}
+            x2={activeX}
+            y2={HEIGHT - PAD_BOTTOM}
+            stroke="rgba(245,240,232,0.2)"
+            strokeWidth="1"
+            strokeDasharray="3,3"
+          />
+        )}
+
         <path d={tiktokPath} fill="none" stroke="var(--sage)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         <path d={igPath} fill="none" stroke="var(--gold)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 
         {points.map((p, i) => (
           <g key={`pts-${i}`}>
-            <circle cx={xFor(i)} cy={yFor(p.tiktok)} r={i === points.length - 1 ? 4 : 2.5} fill="var(--sage)" />
-            <circle cx={xFor(i)} cy={yFor(p.ig)} r={i === points.length - 1 ? 4 : 2.5} fill="var(--gold)" />
+            {/* Invisible, generous hit target so hover/tap works well past just the dot */}
+            <rect
+              x={xFor(i) - (plotW / (points.length - 1)) / 2}
+              y={PAD_TOP}
+              width={plotW / (points.length - 1)}
+              height={plotH}
+              fill="transparent"
+              tabIndex={0}
+              role="button"
+              aria-label={`Week ${p.week}: Instagram ${formatFull(p.ig)}, TikTok ${formatFull(p.tiktok)}`}
+              onMouseEnter={() => setActiveIndex(i)}
+              onFocus={() => setActiveIndex(i)}
+              onBlur={() => setActiveIndex((cur) => (cur === i ? null : cur))}
+              onTouchStart={() => setActiveIndex(i)}
+              style={{ cursor: "pointer", outline: "none" }}
+            />
+            <circle cx={xFor(i)} cy={yFor(p.tiktok)} r={activeIndex === i ? 5 : i === points.length - 1 ? 4 : 2.5} fill="var(--sage)" style={{ pointerEvents: "none", transition: "r 150ms ease-out" }} />
+            <circle cx={xFor(i)} cy={yFor(p.ig)} r={activeIndex === i ? 5 : i === points.length - 1 ? 4 : 2.5} fill="var(--gold)" style={{ pointerEvents: "none", transition: "r 150ms ease-out" }} />
           </g>
         ))}
+
+        {/* Tooltip */}
+        {active && (
+          <g style={{ pointerEvents: "none" }}>
+            <rect
+              x={tooltipX}
+              y={PAD_TOP}
+              width={tooltipWidth}
+              height={44}
+              rx="2"
+              fill="var(--ink)"
+              stroke="var(--gold)"
+              strokeWidth="1"
+            />
+            <text x={tooltipX + 8} y={PAD_TOP + 14} fontSize="9" fill="rgba(245,240,232,0.5)" fontFamily="Outfit, sans-serif">
+              Week {active.week}
+            </text>
+            <text x={tooltipX + 8} y={PAD_TOP + 27} fontSize="10" fill="var(--gold)" fontFamily="Outfit, sans-serif" fontWeight="600">
+              IG {formatFull(active.ig)}
+            </text>
+            <text x={tooltipX + 8} y={PAD_TOP + 39} fontSize="10" fill="var(--sage)" fontFamily="Outfit, sans-serif" fontWeight="600">
+              TikTok {formatFull(active.tiktok)}
+            </text>
+          </g>
+        )}
       </svg>
     </div>
   );

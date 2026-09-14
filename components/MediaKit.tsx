@@ -1,5 +1,8 @@
 "use client";
 
+import Reveal from "./Reveal";
+import CountUpNumber from "./CountUpNumber";
+
 const partners = ["OLOV Trimmer", "Based Bodyworks", "Crispy Halal", "Rimbério"];
 
 const stats: { value: string; label: string; icon: "people" | "eye" | "heart" | "trending" }[] = [
@@ -187,28 +190,28 @@ export default function MediaKit() {
 
         {/* Stats grid */}
         <div className="grid sm:grid-cols-3 gap-4 mb-16">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="p-6 text-center transition-transform duration-200 hover:-translate-y-1"
-              style={{ backgroundColor: "var(--ink)", border: "1px solid rgba(196,160,106,0.3)" }}
-            >
-              <div className="flex justify-center mb-3" style={{ color: "var(--gold)" }}>
-                <StatIcon kind={stat.icon} />
-              </div>
+          {stats.map((stat, i) => (
+            <Reveal key={stat.label} delay={i * 60}>
               <div
-                className="font-cormorant font-semibold mb-1"
-                style={{ color: "var(--gold)", fontSize: "2rem" }}
+                className="p-6 text-center transition-transform duration-200 hover:-translate-y-1"
+                style={{ backgroundColor: "var(--ink)", border: "1px solid rgba(196,160,106,0.3)" }}
               >
-                {stat.value}
+                <div className="flex justify-center mb-3" style={{ color: "var(--gold)" }}>
+                  <StatIcon kind={stat.icon} />
+                </div>
+                <CountUpNumber
+                  value={stat.value}
+                  className="font-cormorant font-semibold mb-1 block"
+                  style={{ color: "var(--gold)", fontSize: "2rem" }}
+                />
+                <div
+                  className="font-outfit text-xs uppercase tracking-widest"
+                  style={{ color: "rgba(245,240,232,0.6)" }}
+                >
+                  {stat.label}
+                </div>
               </div>
-              <div
-                className="font-outfit text-xs uppercase tracking-widest"
-                style={{ color: "rgba(245,240,232,0.6)" }}
-              >
-                {stat.label}
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
         <p
@@ -280,25 +283,26 @@ export default function MediaKit() {
           What I Offer
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
-          {offers.map((offer) => (
-            <div
-              key={offer.title}
-              className="p-6 transition-transform duration-200 hover:-translate-y-1"
-              style={{ backgroundColor: "var(--ink)", border: "1px solid rgba(196,160,106,0.25)" }}
-            >
-              <h3
-                className="font-cormorant font-semibold text-lg mb-2"
-                style={{ color: "var(--cream)" }}
+          {offers.map((offer, i) => (
+            <Reveal key={offer.title} delay={i * 60}>
+              <div
+                className="p-6 h-full transition-transform duration-200 hover:-translate-y-1"
+                style={{ backgroundColor: "var(--ink)", border: "1px solid rgba(196,160,106,0.25)" }}
               >
-                {offer.title}
-              </h3>
-              <p
-                className="font-outfit font-light text-sm leading-relaxed"
-                style={{ color: "rgba(245,240,232,0.6)" }}
-              >
-                {offer.description}
-              </p>
-            </div>
+                <h3
+                  className="font-cormorant font-semibold text-lg mb-2"
+                  style={{ color: "var(--cream)" }}
+                >
+                  {offer.title}
+                </h3>
+                <p
+                  className="font-outfit font-light text-sm leading-relaxed"
+                  style={{ color: "rgba(245,240,232,0.6)" }}
+                >
+                  {offer.description}
+                </p>
+              </div>
+            </Reveal>
           ))}
         </div>
         <p

@@ -1,5 +1,7 @@
 "use client";
 
+import Reveal from "./Reveal";
+
 const entries: { when: string; title: string; body: string[] }[] = [
   {
     when: "Growing Up",
@@ -98,7 +100,7 @@ export default function StoryTimeline() {
           />
           <div className="space-y-14">
             {entries.map((entry, i) => (
-              <div key={entry.title} className="relative sm:pl-10">
+              <Reveal key={entry.title} className="relative sm:pl-10">
                 <div
                   className="hidden sm:flex absolute left-0 top-1 -translate-x-1/2 items-center justify-center rounded-full"
                   style={{
@@ -137,7 +139,7 @@ export default function StoryTimeline() {
                     {p}
                   </p>
                 ))}
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>

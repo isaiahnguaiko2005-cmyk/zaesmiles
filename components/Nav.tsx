@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -16,14 +16,23 @@ const LINKS: { label: string; href: string }[] = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4"
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300"
       style={{
-        backgroundColor: "rgba(12,15,20,0.9)",
-        backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(196,160,106,0.15)",
+        backgroundColor: scrolled ? "rgba(12,15,20,0.97)" : "rgba(12,15,20,0.85)",
+        backdropFilter: scrolled ? "blur(16px)" : "blur(10px)",
+        borderBottom: scrolled ? "1px solid rgba(196,160,106,0.3)" : "1px solid rgba(196,160,106,0.12)",
+        boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.25)" : "none",
       }}
     >
       {/* Logo + desktop links, grouped left so the header doesn't read as two

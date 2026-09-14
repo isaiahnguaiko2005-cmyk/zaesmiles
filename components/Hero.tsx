@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import CountUpNumber from "./CountUpNumber";
 
 export default function Hero() {
   return (
@@ -236,12 +237,11 @@ export default function Hero() {
 
             <div className="flex gap-10 mt-6">
               <div className="text-center">
-                <div
-                  className="font-cormorant font-semibold"
+                <CountUpNumber
+                  value="200M+"
+                  className="font-cormorant font-semibold block"
                   style={{ color: "var(--gold)", fontSize: "1.75rem" }}
-                >
-                  200M+
-                </div>
+                />
                 <div
                   className="font-outfit text-xs uppercase tracking-widest mt-1"
                   style={{ color: "rgba(245,240,232,0.5)" }}
@@ -250,12 +250,11 @@ export default function Hero() {
                 </div>
               </div>
               <div className="text-center">
-                <div
-                  className="font-cormorant font-semibold"
+                <CountUpNumber
+                  value="10K+"
+                  className="font-cormorant font-semibold block"
                   style={{ color: "var(--gold)", fontSize: "1.75rem" }}
-                >
-                  10K+
-                </div>
+                />
                 <div
                   className="font-outfit text-xs uppercase tracking-widest mt-1"
                   style={{ color: "rgba(245,240,232,0.5)" }}

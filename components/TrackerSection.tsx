@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import StatsCard from "./StatsCard";
 import GrowthChart from "./GrowthChart";
+import Reveal from "./Reveal";
 import { getProjectDay } from "../lib/projectDay";
 
 interface StatsData {
@@ -59,7 +60,7 @@ export default function TrackerSection() {
             aria-label="Loading stats..."
           />
         ) : (
-          <>
+          <Reveal>
             <StatsCard
               day={day}
               igFollowers={stats?.ig_followers ?? 0}
@@ -99,7 +100,7 @@ export default function TrackerSection() {
                 Follow the Full Project 300K Story &rarr;
               </Link>
             </div>
-          </>
+          </Reveal>
         )}
       </div>
     </section>

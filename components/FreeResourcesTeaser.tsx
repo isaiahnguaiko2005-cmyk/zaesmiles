@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import guides from "@/data/guides.json";
+import Reveal from "./Reveal";
+import SectionSeam from "./SectionSeam";
 
 const featuredIds = [
   "fifteen-psychology-hacks",
@@ -16,7 +18,8 @@ const featured = featuredIds
 
 export default function FreeResourcesTeaser() {
   return (
-    <section className="py-20 lg:py-28" style={{ backgroundColor: "var(--ink)" }}>
+    <section className="relative py-20 lg:py-28" style={{ backgroundColor: "var(--ink)" }}>
+      <SectionSeam to="var(--cream2)" />
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4 text-center"
@@ -38,51 +41,52 @@ export default function FreeResourcesTeaser() {
         </p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-          {featured.map((guide) => (
-            <Link
-              key={guide.id}
-              href="/guides"
-              className="p-6 flex flex-col transition-transform duration-200 hover:-translate-y-1"
-              style={{
-                backgroundColor: "var(--ink2)",
-                border: guide.leadsTo
-                  ? "1px solid var(--gold)"
-                  : "1px solid rgba(196,160,106,0.25)",
-              }}
-            >
-              {guide.popular && (
+          {featured.map((guide, i) => (
+            <Reveal key={guide.id} delay={i * 60}>
+              <Link
+                href="/guides"
+                className="p-6 h-full flex flex-col transition-transform duration-200 hover:-translate-y-1"
+                style={{
+                  backgroundColor: "var(--ink2)",
+                  border: guide.leadsTo
+                    ? "1px solid var(--gold)"
+                    : "1px solid rgba(196,160,106,0.25)",
+                }}
+              >
+                {guide.popular && (
+                  <span
+                    className="font-outfit text-[10px] uppercase tracking-widest font-medium mb-3 inline-block w-fit px-2 py-0.5"
+                    style={{ backgroundColor: "var(--gold)", color: "var(--ink)" }}
+                  >
+                    Popular
+                  </span>
+                )}
                 <span
-                  className="font-outfit text-[10px] uppercase tracking-widest font-medium mb-3 inline-block w-fit px-2 py-0.5"
-                  style={{ backgroundColor: "var(--gold)", color: "var(--ink)" }}
+                  className="font-outfit text-xs uppercase tracking-widest font-medium mb-3"
+                  style={{ color: "var(--sage)" }}
                 >
-                  Popular
+                  {guide.category}
                 </span>
-              )}
-              <span
-                className="font-outfit text-xs uppercase tracking-widest font-medium mb-3"
-                style={{ color: "var(--sage)" }}
-              >
-                {guide.category}
-              </span>
-              <h3
-                className="font-cormorant font-semibold text-lg mb-2 leading-snug"
-                style={{ color: "var(--cream)" }}
-              >
-                {guide.title}
-              </h3>
-              <p
-                className="font-outfit font-light text-sm leading-relaxed flex-1 mb-5"
-                style={{ color: "rgba(245,240,232,0.6)" }}
-              >
-                {guide.description}
-              </p>
-              <span
-                className="font-outfit text-xs font-medium uppercase tracking-wide"
-                style={{ color: "var(--gold)" }}
-              >
-                Download Free &rarr;
-              </span>
-            </Link>
+                <h3
+                  className="font-cormorant font-semibold text-lg mb-2 leading-snug"
+                  style={{ color: "var(--cream)" }}
+                >
+                  {guide.title}
+                </h3>
+                <p
+                  className="font-outfit font-light text-sm leading-relaxed flex-1 mb-5"
+                  style={{ color: "rgba(245,240,232,0.6)" }}
+                >
+                  {guide.description}
+                </p>
+                <span
+                  className="font-outfit text-xs font-medium uppercase tracking-wide"
+                  style={{ color: "var(--gold)" }}
+                >
+                  Download Free &rarr;
+                </span>
+              </Link>
+            </Reveal>
           ))}
         </div>
 

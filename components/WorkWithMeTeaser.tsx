@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Reveal from "./Reveal";
+import SectionSeam from "./SectionSeam";
 
 export default function WorkWithMeTeaser() {
   return (
-    <section className="py-20 lg:py-28" style={{ backgroundColor: "var(--cream2)" }}>
-      <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
+    <section className="relative py-20 lg:py-28" style={{ backgroundColor: "var(--cream2)" }}>
+      <SectionSeam to="var(--ink)" />
+      <Reveal className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
           style={{ color: "var(--sage)" }}
@@ -52,7 +55,7 @@ export default function WorkWithMeTeaser() {
             Get in Touch
           </a>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
