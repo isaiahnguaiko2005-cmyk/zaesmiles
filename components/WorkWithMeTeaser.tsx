@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import Reveal from "./Reveal";
-import SectionSeam from "./SectionSeam";
 
 export default function WorkWithMeTeaser() {
   return (
-    <section className="relative py-20 lg:py-28" style={{ backgroundColor: "var(--cream2)" }}>
-      <SectionSeam to="var(--ink)" />
+    <section className="py-20 lg:py-28" style={{ backgroundColor: "var(--cream2)" }}>
       <Reveal className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"

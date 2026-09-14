@@ -62,6 +62,25 @@ const whyWorkWithMe = [
   "Fast turnaround and direct communication, no agency layer",
 ];
 
+// What brands actually vet creators on before partnering (2026 industry
+// standard: real engagement over vanity metrics, niche authenticity over
+// raw follower count, audience quality over audience size) — mapped to
+// what's actually true here, not aspirational claims.
+const whatBrandsVetFor = [
+  {
+    criterion: "Real engagement, not vanity metrics",
+    fit: "19% blended engagement rate vs. a 1-3% industry average",
+  },
+  {
+    criterion: "Niche authenticity",
+    fit: "Every post is genuinely about social psychology — not a rented audience for one-off ads",
+  },
+  {
+    criterion: "Audience quality over follower count",
+    fit: "12.2K+ engaged followers who share, save, and act — not passive scroll-past numbers",
+  },
+];
+
 function StatIcon({ kind }: { kind: "people" | "eye" | "heart" | "trending" }) {
   const common = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
   switch (kind) {
@@ -369,6 +388,43 @@ export default function MediaKit() {
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* What brands actually vet for */}
+        <div
+          className="p-8 lg:p-10 mb-20"
+          style={{ backgroundColor: "var(--ink)", border: "1px solid var(--gold)" }}
+        >
+          <span
+            className="font-outfit text-xs uppercase tracking-widest font-medium block mb-2"
+            style={{ color: "var(--gold)" }}
+          >
+            What Brands Actually Vet For
+          </span>
+          <p
+            className="font-outfit font-light text-sm mb-6"
+            style={{ color: "rgba(245,240,232,0.5)" }}
+          >
+            Based on 2026 creator-partnership standards — not just what sounds good.
+          </p>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {whatBrandsVetFor.map((item) => (
+              <div key={item.criterion}>
+                <div
+                  className="font-outfit text-xs uppercase tracking-wide font-medium mb-2"
+                  style={{ color: "var(--sage)" }}
+                >
+                  {item.criterion}
+                </div>
+                <p
+                  className="font-outfit font-light text-sm leading-relaxed"
+                  style={{ color: "rgba(245,240,232,0.75)" }}
+                >
+                  {item.fit}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Partners + portfolio */}

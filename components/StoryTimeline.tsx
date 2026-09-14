@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal";
 
 const entries: { when: string; title: string; body: string[] }[] = [
@@ -76,6 +77,38 @@ const entries: { when: string; title: string; body: string[] }[] = [
 ];
 
 export default function StoryTimeline() {
+  const lineRef = useRef<HTMLDivElement>(null);
+  const [fillPct, setFillPct] = useState(0);
+
+  useEffect(() => {
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const onScroll = () => {
+      const el = lineRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.height === 0) return; // line is display:none below the sm: breakpoint
+      const viewportRef = window.innerHeight * 0.42;
+      const progress = (viewportRef - rect.top) / rect.height;
+      setFillPct(Math.min(Math.max(progress, 0), 1) * 100);
+    };
+
+    if (prefersReduced) {
+      setFillPct(100);
+      return;
+    }
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   return (
     <section className="py-24 lg:py-32" style={{ backgroundColor: "var(--ink)" }}>
       <div className="max-w-3xl mx-auto px-6 lg:px-12">
@@ -94,10 +127,21 @@ export default function StoryTimeline() {
 
         <div className="relative">
           <div
+            ref={lineRef}
             className="absolute left-0 top-2 bottom-2 hidden sm:block"
             style={{ width: "1px", backgroundColor: "rgba(196,160,106,0.25)" }}
             aria-hidden="true"
-          />
+          >
+            <div
+              className="absolute left-0 top-0 w-full"
+              style={{
+                height: `${fillPct}%`,
+                backgroundColor: "var(--gold)",
+                transition: "height 100ms linear",
+                boxShadow: "0 0 6px rgba(196,160,106,0.6)",
+              }}
+            />
+          </div>
           <div className="space-y-14">
             {entries.map((entry, i) => (
               <Reveal key={entry.title} className="relative sm:pl-10">

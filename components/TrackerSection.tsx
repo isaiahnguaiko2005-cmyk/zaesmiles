@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import StatsCard from "./StatsCard";
 import GrowthChart from "./GrowthChart";
 import Reveal from "./Reveal";
+import SectionSeam from "./SectionSeam";
 import { getProjectDay } from "../lib/projectDay";
 
 interface StatsData {
@@ -47,7 +48,8 @@ export default function TrackerSection() {
   }, []);
 
   return (
-    <section className="py-16 lg:py-20" style={{ backgroundColor: "var(--ink)" }}>
+    <section className="relative py-16 lg:py-20" style={{ backgroundColor: "var(--ink)" }}>
+      <SectionSeam to="var(--cream2)" />
       <div className="max-w-3xl mx-auto px-6 lg:px-12">
         {loading ? (
           <div
