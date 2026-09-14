@@ -1,14 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Reveal from "./Reveal";
 import CountUpNumber from "./CountUpNumber";
-
-const partners = [
-  { name: "OLOV Trimmer", logo: "/logos/olov-trimmer.jpg" },
-  { name: "Based Bodyworks", logo: "/logos/based-bodyworks.jpg" },
-  { name: "Crispy Halal", logo: "/logos/crispy-halal.png" },
-];
+import BrandMarquee from "./BrandMarquee";
+import { partners } from "@/data/partners";
 
 const stats: { value: string; label: string; icon: "people" | "eye" | "heart" | "trending" }[] = [
   { value: "12.2K+", label: "Combined Followers", icon: "people" },
@@ -388,27 +383,8 @@ export default function MediaKit() {
         >
           Brand Partners
         </span>
-        <div
-          className="flex flex-wrap justify-center items-center gap-6 mb-20 p-8"
-          style={{ border: "1px solid rgba(12,15,20,0.1)" }}
-        >
-          {partners.map((partner) => (
-            <div
-              key={partner.name}
-              className="flex items-center justify-center p-4 transition-all duration-300 grayscale opacity-70 hover:grayscale-0 hover:opacity-100"
-              style={{ width: "160px", height: "90px", backgroundColor: "#FFFFFF", border: "1px solid rgba(12,15,20,0.08)" }}
-            >
-              <div className="relative w-full h-full">
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  fill
-                  unoptimized
-                  className="object-contain"
-                />
-              </div>
-            </div>
-          ))}
+        <div className="mb-20">
+          <BrandMarquee brands={partners} />
         </div>
 
         <div

@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import Reveal from "./Reveal";
+import BrandMarquee from "./BrandMarquee";
+import { partners } from "@/data/partners";
 
 export default function WorkWithMeTeaser() {
   return (
@@ -27,7 +29,7 @@ export default function WorkWithMeTeaser() {
           research-backed content that people share and come back to. Full
           numbers, audience breakdown, and what I offer are all in the media kit.
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4 mb-14">
           <Link
             href="/partnerships"
             className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
@@ -53,6 +55,13 @@ export default function WorkWithMeTeaser() {
             Get in Touch
           </a>
         </div>
+        <span
+          className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
+          style={{ color: "rgba(12,15,20,0.4)" }}
+        >
+          Brand Partners
+        </span>
+        <BrandMarquee brands={partners} fadeColor="var(--cream2)" />
       </Reveal>
     </section>
   );
