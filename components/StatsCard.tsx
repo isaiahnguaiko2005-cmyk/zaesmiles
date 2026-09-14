@@ -89,10 +89,10 @@ function DollarMarkerIcon() {
   return (
     <div
       className="flex items-center justify-center rounded-full"
-      style={{ width: "16px", height: "16px", backgroundColor: "var(--gold)" }}
+      style={{ width: "13px", height: "13px", backgroundColor: "var(--gold)" }}
       aria-hidden="true"
     >
-      <span className="font-outfit font-bold" style={{ fontSize: "10px", color: "var(--ink)", lineHeight: 1 }}>
+      <span className="font-outfit font-bold" style={{ fontSize: "8px", color: "var(--ink)", lineHeight: 1 }}>
         $
       </span>
     </div>
@@ -165,7 +165,7 @@ function StatBox({
         <div className="mt-2">
           <div
             className="relative w-full h-1"
-            style={{ backgroundColor: "rgba(196,160,106,0.15)", marginTop: markerIcon ? "8px" : 0 }}
+            style={{ backgroundColor: "rgba(196,160,106,0.15)", marginTop: markerIcon ? "24px" : 0 }}
             role="progressbar"
             aria-valuenow={value}
             aria-valuemin={0}

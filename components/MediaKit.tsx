@@ -1,9 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import Reveal from "./Reveal";
 import CountUpNumber from "./CountUpNumber";
 
-const partners = ["OLOV Trimmer", "Based Bodyworks", "Crispy Halal"];
+const partners = [
+  { name: "OLOV Trimmer", logo: "/logos/olov-trimmer.jpg" },
+  { name: "Based Bodyworks", logo: "/logos/based-bodyworks.jpg" },
+  { name: "Crispy Halal", logo: "/logos/crispy-halal.png" },
+];
 
 const stats: { value: string; label: string; icon: "people" | "eye" | "heart" | "trending" }[] = [
   { value: "12.2K+", label: "Combined Followers", icon: "people" },
@@ -55,30 +60,16 @@ const offers: { title: string; description: string; icon: "video" | "star" | "li
   },
 ];
 
+// Based on 2026 creator-partnership standards (real engagement over vanity
+// metrics, niche authenticity over raw follower count, audience quality over
+// audience size) — reframed as first-person facts, not just what sounds good.
 const whyWorkWithMe = [
   "13%+ engagement rate on Instagram, well above the typical creator benchmark",
   "Content built to actually perform — a proven ability to go viral, not just post and hope",
   "A track record of driving real sales for brand partners, not just impressions",
   "Fast turnaround and direct communication, no agency layer",
-];
-
-// What brands actually vet creators on before partnering (2026 industry
-// standard: real engagement over vanity metrics, niche authenticity over
-// raw follower count, audience quality over audience size) — mapped to
-// what's actually true here, not aspirational claims.
-const whatBrandsVetFor = [
-  {
-    criterion: "Real engagement, not vanity metrics",
-    fit: "19% blended engagement rate vs. a 1-3% industry average",
-  },
-  {
-    criterion: "Niche authenticity",
-    fit: "Every post is genuinely about social psychology — not a rented audience for one-off ads",
-  },
-  {
-    criterion: "Audience quality over follower count",
-    fit: "12.2K+ engaged followers who share, save, and act — not passive scroll-past numbers",
-  },
+  "Real engagement, not vanity metrics — a 19% blended engagement rate vs. a 1-3% industry average",
+  "A niche, high-intent audience that shares and saves, not a rented audience for one-off ads",
 ];
 
 function StatIcon({ kind }: { kind: "people" | "eye" | "heart" | "trending" }) {
@@ -390,43 +381,6 @@ export default function MediaKit() {
           </ul>
         </div>
 
-        {/* What brands actually vet for */}
-        <div
-          className="p-8 lg:p-10 mb-20"
-          style={{ backgroundColor: "var(--ink)", border: "1px solid var(--gold)" }}
-        >
-          <span
-            className="font-outfit text-xs uppercase tracking-widest font-medium block mb-2"
-            style={{ color: "var(--gold)" }}
-          >
-            What Brands Actually Vet For
-          </span>
-          <p
-            className="font-outfit font-light text-sm mb-6"
-            style={{ color: "rgba(245,240,232,0.5)" }}
-          >
-            Based on 2026 creator-partnership standards — not just what sounds good.
-          </p>
-          <div className="grid sm:grid-cols-3 gap-6">
-            {whatBrandsVetFor.map((item) => (
-              <div key={item.criterion}>
-                <div
-                  className="font-outfit text-xs uppercase tracking-wide font-medium mb-2"
-                  style={{ color: "var(--sage)" }}
-                >
-                  {item.criterion}
-                </div>
-                <p
-                  className="font-outfit font-light text-sm leading-relaxed"
-                  style={{ color: "rgba(245,240,232,0.75)" }}
-                >
-                  {item.fit}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Partners + portfolio */}
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
@@ -434,24 +388,28 @@ export default function MediaKit() {
         >
           Brand Partners
         </span>
-        <div className="flex flex-wrap justify-center gap-3 mb-8 p-6" style={{ border: "1px solid rgba(12,15,20,0.1)" }}>
+        <div
+          className="flex flex-wrap justify-center items-center gap-6 mb-20 p-8"
+          style={{ border: "1px solid rgba(12,15,20,0.1)" }}
+        >
           {partners.map((partner) => (
             <div
-              key={partner}
-              className="font-outfit text-sm font-medium px-4 py-2"
-              style={{
-                backgroundColor: "var(--ink)",
-                color: "var(--cream)",
-                border: "1px solid var(--gold)",
-              }}
+              key={partner.name}
+              className="flex items-center justify-center p-4 transition-all duration-300 grayscale opacity-70 hover:grayscale-0 hover:opacity-100"
+              style={{ width: "160px", height: "90px", backgroundColor: "#FFFFFF", border: "1px solid rgba(12,15,20,0.08)" }}
             >
-              {partner}
+              <div className="relative w-full h-full">
+                <Image
+                  src={partner.logo}
+                  alt={partner.name}
+                  fill
+                  unoptimized
+                  className="object-contain"
+                />
+              </div>
             </div>
           ))}
         </div>
-        {/* TODO: swap for real logo images in a horizontal fading strip once
-            asset files are provided (see conversation) — Rimbério removed
-            per request, currency of the remaining three not yet reconfirmed. */}
 
         <div
           className="p-8 lg:p-10 mb-8"
