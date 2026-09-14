@@ -3,12 +3,12 @@
 import Reveal from "./Reveal";
 import CountUpNumber from "./CountUpNumber";
 
-const partners = ["OLOV Trimmer", "Based Bodyworks", "Crispy Halal", "Rimbério"];
+const partners = ["OLOV Trimmer", "Based Bodyworks", "Crispy Halal"];
 
 const stats: { value: string; label: string; icon: "people" | "eye" | "heart" | "trending" }[] = [
   { value: "12.2K+", label: "Combined Followers", icon: "people" },
   { value: "9.8M+", label: "Views, Last 30 Days", icon: "eye" },
-  { value: "19%*", label: "Engagement Rate", icon: "heart" },
+  { value: "19%", label: "Engagement Rate", icon: "heart" },
 ];
 
 const ageBreakdown = [
@@ -32,30 +32,33 @@ const topCountries = [
   { label: "Canada", pct: 1.2 },
 ];
 
-const offers = [
+const offers: { title: string; description: string; icon: "video" | "star" | "link" | "package" }[] = [
   {
     title: "Sponsored Reel / TikTok",
     description: "One story-driven video, cross-posted to Instagram and TikTok.",
+    icon: "video",
   },
   {
     title: "Story / Feed Feature",
     description: "A dedicated feature placement across Stories or the main feed.",
+    icon: "star",
   },
   {
     title: "Link in Bio Placement",
     description: "Your link featured in bio across platforms for an agreed window.",
+    icon: "link",
   },
   {
     title: "Product Collab / UGC",
     description: "Raw or edited content built around your product, for you to repost or run as ads.",
+    icon: "package",
   },
 ];
 
 const whyWorkWithMe = [
   "13%+ engagement rate on Instagram, well above the typical creator benchmark",
-  "Evergreen self-improvement content that keeps earning views months after posting",
-  "A documented growth story via Project 300K — a public, verifiable audience-building process",
-  "Research-backed content voice, not generic motivational filler",
+  "Content built to actually perform — a proven ability to go viral, not just post and hope",
+  "A track record of driving real sales for brand partners, not just impressions",
   "Fast turnaround and direct communication, no agency layer",
 ];
 
@@ -89,6 +92,40 @@ function StatIcon({ kind }: { kind: "people" | "eye" | "heart" | "trending" }) {
         <svg {...common}>
           <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
           <polyline points="17 6 23 6 23 12" />
+        </svg>
+      );
+  }
+}
+
+function OfferIcon({ kind }: { kind: "video" | "star" | "link" | "package" }) {
+  const common = { width: 20, height: 20, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
+  switch (kind) {
+    case "video":
+      return (
+        <svg {...common}>
+          <polygon points="23 7 16 12 23 17 23 7" />
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+        </svg>
+      );
+    case "star":
+      return (
+        <svg {...common}>
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      );
+    case "link":
+      return (
+        <svg {...common}>
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+        </svg>
+      );
+    case "package":
+      return (
+        <svg {...common}>
+          <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+          <line x1="12" y1="22.08" x2="12" y2="12" />
         </svg>
       );
   }
@@ -214,14 +251,6 @@ export default function MediaKit() {
             </Reveal>
           ))}
         </div>
-        <p
-          className="font-outfit text-xs mb-16 -mt-10"
-          style={{ color: "rgba(12,15,20,0.4)" }}
-        >
-          *Blended average of Instagram and TikTok engagement over the last 30
-          days. TikTok&apos;s side of that number includes one viral post &mdash;
-          typical days run lower. Happy to share the platform breakdown on request.
-        </p>
 
         {/* Audience */}
         <h2
@@ -289,6 +318,9 @@ export default function MediaKit() {
                 className="p-6 h-full transition-transform duration-200 hover:-translate-y-1"
                 style={{ backgroundColor: "var(--ink)", border: "1px solid rgba(196,160,106,0.25)" }}
               >
+                <div className="mb-4" style={{ color: "var(--gold)" }}>
+                  <OfferIcon kind={offer.icon} />
+                </div>
                 <h3
                   className="font-cormorant font-semibold text-lg mb-2"
                   style={{ color: "var(--cream)" }}
@@ -340,7 +372,13 @@ export default function MediaKit() {
         </div>
 
         {/* Partners + portfolio */}
-        <div className="flex flex-wrap gap-3 mb-8">
+        <span
+          className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
+          style={{ color: "var(--sage)" }}
+        >
+          Brand Partners
+        </span>
+        <div className="flex flex-wrap justify-center gap-3 mb-8 p-6" style={{ border: "1px solid rgba(12,15,20,0.1)" }}>
           {partners.map((partner) => (
             <div
               key={partner}
@@ -355,6 +393,9 @@ export default function MediaKit() {
             </div>
           ))}
         </div>
+        {/* TODO: swap for real logo images in a horizontal fading strip once
+            asset files are provided (see conversation) — Rimbério removed
+            per request, currency of the remaining three not yet reconfirmed. */}
 
         <div
           className="p-8 lg:p-10 mb-8"
@@ -402,23 +443,50 @@ export default function MediaKit() {
 
         {/* Email */}
         <div
-          className="p-10 lg:p-12 text-center"
+          className="premium-glow p-10 lg:p-12 text-center"
           style={{ border: "1px solid var(--gold)", backgroundColor: "var(--ink)" }}
         >
+          <div
+            className="mx-auto mb-5 flex items-center justify-center rounded-full"
+            style={{ width: "48px", height: "48px", border: "1px solid var(--gold)", color: "var(--gold)" }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 6-10 7L2 6" />
+            </svg>
+          </div>
           <span
-            className="font-outfit text-xs uppercase tracking-widest font-medium block mb-6"
+            className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
             style={{ color: "var(--gold)" }}
           >
             Business Email
           </span>
           <a
             href="mailto:isaiahnguaiko6@gmail.com"
-            className="font-cormorant font-semibold block transition-colors focus:outline-none"
+            className="font-cormorant font-semibold block mb-8 transition-colors focus:outline-none"
             style={{ color: "var(--cream)", fontSize: "clamp(1.35rem, 3.5vw, 2rem)" }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--gold)")}
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--cream)")}
           >
             isaiahnguaiko6@gmail.com
+          </a>
+          <a
+            href="mailto:isaiahnguaiko6@gmail.com"
+            className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97] focus:outline-none"
+            style={{
+              backgroundColor: "var(--gold)",
+              color: "var(--ink)",
+              padding: "14px 28px",
+              minHeight: "48px",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(196,160,106,0.35)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.boxShadow = "none";
+            }}
+          >
+            Email Me &rarr;
           </a>
           <div className="mt-6 space-y-1">
             <p className="font-outfit font-light text-sm" style={{ color: "rgba(245,240,232,0.45)" }}>
