@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import StatsCard from "./StatsCard";
+import GrowthChart from "./GrowthChart";
 import { getProjectDay } from "../lib/projectDay";
 
 interface StatsData {
@@ -13,6 +15,7 @@ interface StatsData {
   tiktok_delta: number;
   revenue_delta: number;
   jaguar_delta: number;
+  history?: { week: string; combined: number }[];
   error?: boolean;
 }
 
@@ -56,18 +59,47 @@ export default function TrackerSection() {
             aria-label="Loading stats..."
           />
         ) : (
-          <StatsCard
-            day={day}
-            igFollowers={stats?.ig_followers ?? 0}
-            tiktokFollowers={stats?.tiktok_followers ?? 0}
-            revenue={stats?.revenue ?? 0}
-            jaguarFund={stats?.jaguar_fund ?? 0}
-            igDelta={stats?.ig_delta ?? 0}
-            tiktokDelta={stats?.tiktok_delta ?? 0}
-            revenueDelta={stats?.revenue_delta ?? 0}
-            jaguarDelta={stats?.jaguar_delta ?? 0}
-            loading={stats?.error}
-          />
+          <>
+            <StatsCard
+              day={day}
+              igFollowers={stats?.ig_followers ?? 0}
+              tiktokFollowers={stats?.tiktok_followers ?? 0}
+              revenue={stats?.revenue ?? 0}
+              jaguarFund={stats?.jaguar_fund ?? 0}
+              igDelta={stats?.ig_delta ?? 0}
+              tiktokDelta={stats?.tiktok_delta ?? 0}
+              revenueDelta={stats?.revenue_delta ?? 0}
+              jaguarDelta={stats?.jaguar_delta ?? 0}
+              loading={stats?.error}
+            />
+            {stats?.history && stats.history.length >= 2 && (
+              <div
+                className="mt-4"
+                style={{
+                  backgroundColor: "var(--ink2)",
+                  border: "1px solid var(--gold)",
+                  boxShadow: "0 4px 32px rgba(196,160,106,0.08)",
+                }}
+              >
+                <GrowthChart history={stats.history} target={300000} />
+              </div>
+            )}
+            <div className="mt-6 text-center">
+              <Link
+                href="/about"
+                className="story-link font-outfit text-sm font-medium uppercase tracking-wide transition-colors duration-200"
+                style={{ color: "var(--gold)" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.color = "var(--cream)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.color = "var(--gold)";
+                }}
+              >
+                Follow the Full Project 300K Story &rarr;
+              </Link>
+            </div>
+          </>
         )}
       </div>
     </section>

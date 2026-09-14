@@ -53,6 +53,19 @@ function lastNonBlank(rows: string[][], col: number, beforeIndex: number): numbe
   return null;
 }
 
+// Builds a full carried-forward series for a column across every row, so a
+// chart doesn't dip to 0 on weeks where that cell was left blank.
+function buildSeries(rows: string[][], col: number): number[] {
+  const series: number[] = [];
+  let last = 0;
+  for (const row of rows) {
+    const raw = row[col];
+    if (raw && raw.trim() !== "") last = parseNum(raw);
+    series.push(last);
+  }
+  return series;
+}
+
 // If this week's cell for a metric is left blank, carry forward the last
 // filled value instead of showing 0 — and report no change (delta 0) since
 // nothing was actually updated this week.
@@ -95,6 +108,13 @@ export async function GET() {
     const revenue = computeMetric(dataRows, 3);
     const jaguar = computeMetric(dataRows, 4);
 
+    const igSeries = buildSeries(dataRows, 1);
+    const tiktokSeries = buildSeries(dataRows, 2);
+    const history = dataRows.map((row, i) => ({
+      week: row[0]?.trim() || String(i + 1),
+      combined: igSeries[i] + tiktokSeries[i],
+    }));
+
     return Response.json({
       ig_followers: ig.value,
       tiktok_followers: tiktok.value,
@@ -104,6 +124,7 @@ export async function GET() {
       tiktok_delta: tiktok.delta,
       revenue_delta: revenue.delta,
       jaguar_delta: jaguar.delta,
+      history,
     });
   } catch {
     return Response.json({ error: true }, { status: 500 });

@@ -5,8 +5,7 @@ const partners = ["OLOV Trimmer", "Based Bodyworks", "Crispy Halal", "Rimbério"
 const stats: { value: string; label: string; icon: "people" | "eye" | "heart" | "trending" }[] = [
   { value: "12.2K+", label: "Combined Followers", icon: "people" },
   { value: "9.8M+", label: "Views, Last 30 Days", icon: "eye" },
-  { value: "13%", label: "IG Engagement Rate", icon: "heart" },
-  { value: "25%*", label: "TikTok Engagement Rate", icon: "trending" },
+  { value: "19%*", label: "Engagement Rate", icon: "heart" },
 ];
 
 const ageBreakdown = [
@@ -187,7 +186,7 @@ export default function MediaKit() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+        <div className="grid sm:grid-cols-3 gap-4 mb-16">
           {stats.map((stat) => (
             <div
               key={stat.label}
@@ -216,8 +215,9 @@ export default function MediaKit() {
           className="font-outfit text-xs mb-16 -mt-10"
           style={{ color: "rgba(12,15,20,0.4)" }}
         >
-          *TikTok engagement rate reflects the last 30 days, including one viral
-          post. Typical days run lower — happy to share the breakdown on request.
+          *Blended average of Instagram and TikTok engagement over the last 30
+          days. TikTok&apos;s side of that number includes one viral post &mdash;
+          typical days run lower. Happy to share the platform breakdown on request.
         </p>
 
         {/* Audience */}

@@ -89,7 +89,7 @@ export default function FreeResourcesTeaser() {
         <div className="text-center">
           <Link
             href="/guides"
-            className="font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2 transition-all duration-200"
+            className="story-link font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2 transition-all duration-200"
             style={{ color: "var(--gold)" }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.color = "var(--cream)";

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import About from "@/components/About";
+import StoryTimeline from "@/components/StoryTimeline";
 import Project300K from "@/components/Project300K";
 import JaguarFType from "@/components/JaguarFType";
 
@@ -12,6 +13,7 @@ export default function AboutPage() {
   return (
     <>
       <About />
+      <StoryTimeline />
       <Project300K />
       <JaguarFType />
     </>

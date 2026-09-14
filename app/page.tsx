@@ -3,6 +3,7 @@ import TrackerSection from "@/components/TrackerSection";
 import FreeResourcesTeaser from "@/components/FreeResourcesTeaser";
 import AboutTeaser from "@/components/AboutTeaser";
 import ProductsTeaser from "@/components/ProductsTeaser";
+import WorkWithMeTeaser from "@/components/WorkWithMeTeaser";
 import Socials from "@/components/Socials";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <FreeResourcesTeaser />
       <AboutTeaser />
       <ProductsTeaser />
+      <WorkWithMeTeaser />
       <Socials />
     </>
   );
