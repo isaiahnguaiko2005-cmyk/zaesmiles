@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import guides from "@/data/guides.json";
+import SectionSeam from "./SectionSeam";
 
 const OPTIONS: { label: string; guideId: string }[] = [
   { label: "I freeze up or hesitate before approaching people", guideId: "three-second-door" },
@@ -16,7 +17,8 @@ export default function GuideFinderQuiz() {
   const result = selected ? guides.find((g) => g.id === selected) : null;
 
   return (
-    <section className="py-20 lg:py-28" style={{ backgroundColor: "var(--cream2)" }}>
+    <section className="relative py-20 lg:py-28" style={{ backgroundColor: "var(--cream2)" }}>
+      <SectionSeam to="var(--ink)" />
       <div className="max-w-2xl mx-auto px-6 lg:px-12 text-center">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"

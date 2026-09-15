@@ -142,3 +142,21 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .quiz-result-in { animation: none; }
 }
+
+@keyframes brandMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.brand-marquee-track {
+  animation: brandMarquee 45s linear infinite;
+}
+
+.brand-marquee-track:hover,
+.brand-marquee-track:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-marquee-track { animation: none; }
+}

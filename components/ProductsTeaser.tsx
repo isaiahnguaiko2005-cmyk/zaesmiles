@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Reveal from "./Reveal";
+import SectionSeam from "./SectionSeam";
 
 const teaserProducts = [
   {
@@ -20,7 +21,8 @@ const teaserProducts = [
 
 export default function ProductsTeaser() {
   return (
-    <section className="py-20 lg:py-28" style={{ backgroundColor: "var(--cream)" }}>
+    <section className="relative py-20 lg:py-28" style={{ backgroundColor: "var(--cream)" }}>
+      <SectionSeam to="var(--ink)" />
       <div className="max-w-5xl mx-auto px-6 lg:px-12">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4 text-center"

@@ -2,8 +2,8 @@
 
 import Reveal from "./Reveal";
 import CountUpNumber from "./CountUpNumber";
-
-const partners = ["OLOV Trimmer", "Based Bodyworks", "Crispy Halal"];
+import BrandMarquee from "./BrandMarquee";
+import { partners } from "@/data/partners";
 
 const stats: { value: string; label: string; icon: "people" | "eye" | "heart" | "trending" }[] = [
   { value: "12.2K+", label: "Combined Followers", icon: "people" },
@@ -55,11 +55,16 @@ const offers: { title: string; description: string; icon: "video" | "star" | "li
   },
 ];
 
+// Based on 2026 creator-partnership standards (real engagement over vanity
+// metrics, niche authenticity over raw follower count, audience quality over
+// audience size) — reframed as first-person facts, not just what sounds good.
 const whyWorkWithMe = [
   "13%+ engagement rate on Instagram, well above the typical creator benchmark",
   "Content built to actually perform — a proven ability to go viral, not just post and hope",
   "A track record of driving real sales for brand partners, not just impressions",
   "Fast turnaround and direct communication, no agency layer",
+  "Real engagement, not vanity metrics — a 19% blended engagement rate vs. a 1-3% industry average",
+  "A niche, high-intent audience that shares and saves, not a rented audience for one-off ads",
 ];
 
 function StatIcon({ kind }: { kind: "people" | "eye" | "heart" | "trending" }) {
@@ -378,24 +383,9 @@ export default function MediaKit() {
         >
           Brand Partners
         </span>
-        <div className="flex flex-wrap justify-center gap-3 mb-8 p-6" style={{ border: "1px solid rgba(12,15,20,0.1)" }}>
-          {partners.map((partner) => (
-            <div
-              key={partner}
-              className="font-outfit text-sm font-medium px-4 py-2"
-              style={{
-                backgroundColor: "var(--ink)",
-                color: "var(--cream)",
-                border: "1px solid var(--gold)",
-              }}
-            >
-              {partner}
-            </div>
-          ))}
+        <div className="mb-20">
+          <BrandMarquee brands={partners} />
         </div>
-        {/* TODO: swap for real logo images in a horizontal fading strip once
-            asset files are provided (see conversation) — Rimbério removed
-            per request, currency of the remaining three not yet reconfirmed. */}
 
         <div
           className="p-8 lg:p-10 mb-8"
