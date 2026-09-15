@@ -95,22 +95,6 @@ export default function About() {
                 everything.
               </p>
             </div>
-
-            <div className="flex flex-wrap gap-3">
-              {["2M+ Monthly Reach", "Active Discord Community"].map((label) => (
-                <div
-                  key={label}
-                  className="font-outfit text-sm font-medium px-4 py-2"
-                  style={{
-                    border: "1px solid var(--gold)",
-                    backgroundColor: "var(--ink)",
-                    color: "var(--cream)",
-                  }}
-                >
-                  {label}
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
