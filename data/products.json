@@ -3,6 +3,7 @@
     "id": "the-mitch-protocol",
     "title": "The Mitch Protocol",
     "premium": true,
+    "underRevamp": true,
     "description": "You know the freeze. Rehearsing the sentence before you say it, replaying it at 2am after. This is the system that shuts the self-monitoring off in the exact moments it spikes hardest: the person you're into, the group you go quiet in, the room full of strangers. Five real conversations broken down move by move, plus the research behind why it works.",
     "category": "Conversational System",
     "price": "$2.99",
