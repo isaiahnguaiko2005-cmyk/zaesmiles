@@ -4,6 +4,7 @@ import productsData from "../data/products.json";
 import { useCountdown } from "../lib/useCountdown";
 import ReviewRotator, { RotatorItem } from "./ReviewRotator";
 import Reveal from "./Reveal";
+import RevampOverlay from "./RevampOverlay";
 
 type Product = {
   id: string;
@@ -20,6 +21,7 @@ type Product = {
   };
   proof?: RotatorItem[];
   premium?: boolean;
+  underRevamp?: boolean;
 };
 
 const UNMONITORED_PHASES = [
@@ -296,22 +298,35 @@ export default function Products() {
 
 function ProductCard({ product }: { product: Product }) {
   const { isActive, display } = useCountdown(product.discount?.endsAt);
+  const isRevamp = !!product.underRevamp;
 
   return (
     <div
-      className={`p-6 flex flex-col transition-transform duration-200 hover:-translate-y-1${product.premium ? " premium-glow" : ""}`}
+      className={`relative overflow-hidden p-6 flex flex-col transition-transform duration-200${
+        isRevamp ? "" : " hover:-translate-y-1"
+      }${product.premium && !isRevamp ? " premium-glow" : ""}`}
       style={{
         backgroundColor: "var(--ink)",
         border: isActive ? "1px solid var(--gold)" : "1px solid rgba(196,160,106,0.25)",
         transition: "border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
       }}
       onMouseEnter={(e) => {
+        if (isRevamp) return;
         (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 28px rgba(196,160,106,0.2)";
       }}
       onMouseLeave={(e) => {
+        if (isRevamp) return;
         (e.currentTarget as HTMLElement).style.boxShadow = "none";
       }}
     >
+      <div
+        style={
+          isRevamp
+            ? { filter: "grayscale(1)", opacity: 0.8, pointerEvents: "none" }
+            : undefined
+        }
+        className="flex flex-col flex-1"
+      >
       <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium"
@@ -381,23 +396,33 @@ function ProductCard({ product }: { product: Product }) {
           </div>
         )}
       </div>
-      <a
-        href={product.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2 focus:outline-none"
-        style={{ color: "var(--cream)" }}
-        aria-label={`${product.linkLabel} — ${product.title}`}
-        onFocus={(e) => {
-          (e.currentTarget as HTMLElement).style.outline = "2px solid var(--gold)";
-          (e.currentTarget as HTMLElement).style.outlineOffset = "3px";
-        }}
-        onBlur={(e) => {
-          (e.currentTarget as HTMLElement).style.outline = "none";
-        }}
-      >
-        {product.linkLabel} →
-      </a>
+      {isRevamp ? (
+        <span
+          aria-disabled="true"
+          className="font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2"
+          style={{ color: "rgba(245,240,232,0.5)", cursor: "not-allowed" }}
+        >
+          Unavailable during revamp
+        </span>
+      ) : (
+        <a
+          href={product.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2 focus:outline-none"
+          style={{ color: "var(--cream)" }}
+          aria-label={`${product.linkLabel} — ${product.title}`}
+          onFocus={(e) => {
+            (e.currentTarget as HTMLElement).style.outline = "2px solid var(--gold)";
+            (e.currentTarget as HTMLElement).style.outlineOffset = "3px";
+          }}
+          onBlur={(e) => {
+            (e.currentTarget as HTMLElement).style.outline = "none";
+          }}
+        >
+          {product.linkLabel} →
+        </a>
+      )}
       <p
         className="font-outfit font-light text-xs mt-3"
         style={{ color: "rgba(245,240,232,0.35)" }}
@@ -412,6 +437,8 @@ function ProductCard({ product }: { product: Product }) {
           <ReviewRotator items={product.proof} label="Built on research" />
         </div>
       )}
+      </div>
+      {isRevamp && <RevampOverlay />}
     </div>
   );
 }
