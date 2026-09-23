@@ -4,7 +4,7 @@ import productsData from "../data/products.json";
 import { useCountdown } from "../lib/useCountdown";
 import ReviewRotator, { RotatorItem } from "./ReviewRotator";
 import Reveal from "./Reveal";
-import RevampOverlay, { RevampVariant } from "./RevampOverlay";
+import RevampOverlay from "./RevampOverlay";
 
 type Product = {
   id: string;
@@ -22,14 +22,6 @@ type Product = {
   proof?: RotatorItem[];
   premium?: boolean;
   underRevamp?: boolean;
-};
-
-const REVAMP_VARIANT_LABELS: Record<RevampVariant, string> = {
-  1: "Option 1 — Corner Ribbon",
-  2: "Option 2 — Frosted Badge",
-  3: "Option 3 — Caution Frame",
-  4: "Option 4 — Minimal Corner Tag",
-  5: "Option 5 — Rubber Stamp",
 };
 
 const UNMONITORED_PHASES = [
@@ -266,7 +258,7 @@ export default function Products() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {products.map((product, i) => (
             <Reveal key={product.id} delay={i * 60}>
-              <ProductCard product={product} revampVariant={1} />
+              <ProductCard product={product} />
             </Reveal>
           ))}
           <div
@@ -299,49 +291,12 @@ export default function Products() {
             </p>
           </div>
         </div>
-
-        {/* TEMP: side-by-side comparison of revamp-overlay styles for review.
-            Remove this block once a variant is picked, and hardcode that
-            variant's number in the revampVariant prop above. */}
-        <div className="mt-16 pt-10" style={{ borderTop: "1px dashed rgba(138,158,140,0.6)" }}>
-          <p
-            className="font-outfit text-xs uppercase tracking-widest font-medium mb-1"
-            style={{ color: "var(--sage)" }}
-          >
-            Preview only — not part of the live layout
-          </p>
-          <h3
-            className="font-cormorant font-semibold text-2xl mb-6"
-            style={{ color: "var(--ink)" }}
-          >
-            Mitch Protocol revamp-overlay options
-          </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {([1, 2, 3, 4, 5] as RevampVariant[]).map((variant) => (
-              <div key={variant}>
-                <p
-                  className="font-outfit text-xs font-medium mb-2"
-                  style={{ color: "rgba(12,15,20,0.6)" }}
-                >
-                  {REVAMP_VARIANT_LABELS[variant]}
-                </p>
-                <ProductCard product={products[0]} revampVariant={variant} />
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
 }
 
-function ProductCard({
-  product,
-  revampVariant,
-}: {
-  product: Product;
-  revampVariant?: RevampVariant;
-}) {
+function ProductCard({ product }: { product: Product }) {
   const { isActive, display } = useCountdown(product.discount?.endsAt);
   const isRevamp = !!product.underRevamp;
 
@@ -367,7 +322,7 @@ function ProductCard({
       <div
         style={
           isRevamp
-            ? { filter: "grayscale(1)", opacity: 0.45, pointerEvents: "none" }
+            ? { filter: "grayscale(1)", opacity: 0.8, pointerEvents: "none" }
             : undefined
         }
         className="flex flex-col flex-1"
@@ -483,7 +438,7 @@ function ProductCard({
         </div>
       )}
       </div>
-      {isRevamp && <RevampOverlay variant={revampVariant ?? 1} />}
+      {isRevamp && <RevampOverlay />}
     </div>
   );
 }
