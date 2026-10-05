@@ -4,7 +4,14 @@
     "title": "The Mitch Protocol",
     "premium": true,
     "underRevamp": true,
-    "description": "You know the freeze. Rehearsing the sentence before you say it, replaying it at 2am after. This is the system that shuts the self-monitoring off in the exact moments it spikes hardest: the person you're into, the group you go quiet in, the room full of strangers. Five real conversations broken down move by move, plus the research behind why it works.",
+    "description": "The version of you that talks easily already exists. The Mitch Protocol is the complete system for stepping into your most socially confident and adaptable self, Mitch, in any room, until Mitch is just you.",
+    "waitlistIncludes": [
+      "Exact scenarios: someone you're attracted to, a group mid-conversation, a boss, a party where you know one person, a cold room, being watched",
+      "Full dialogues, including the ones that went badly",
+      "Bridge scripts by relationship type",
+      "A rep schedule that turns it into default behavior",
+      "How to stop needing the name"
+    ],
     "category": "Conversational System",
     "price": "$2.99",
     "link": "https://isaiah60.gumroad.com/l/mitch-protocol",

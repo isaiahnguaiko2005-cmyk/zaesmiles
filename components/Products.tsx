@@ -4,7 +4,7 @@ import productsData from "../data/products.json";
 import { useCountdown } from "../lib/useCountdown";
 import ReviewRotator, { RotatorItem } from "./ReviewRotator";
 import Reveal from "./Reveal";
-import RevampOverlay from "./RevampOverlay";
+import WaitlistForm from "./WaitlistForm";
 
 type Product = {
   id: string;
@@ -22,6 +22,7 @@ type Product = {
   proof?: RotatorItem[];
   premium?: boolean;
   underRevamp?: boolean;
+  waitlistIncludes?: string[];
 };
 
 const UNMONITORED_PHASES = [
@@ -319,14 +320,7 @@ function ProductCard({ product }: { product: Product }) {
         (e.currentTarget as HTMLElement).style.boxShadow = "none";
       }}
     >
-      <div
-        style={
-          isRevamp
-            ? { filter: "grayscale(1)", opacity: 0.8, pointerEvents: "none" }
-            : undefined
-        }
-        className="flex flex-col flex-1"
-      >
+      <div className="flex flex-col flex-1">
       <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium"
@@ -334,7 +328,21 @@ function ProductCard({ product }: { product: Product }) {
         >
           {product.category}
         </span>
-        {isActive && (
+        {isRevamp && (
+          <span
+            className="font-outfit text-xs font-medium px-2 py-0.5"
+            style={{
+              backgroundColor: "var(--gold)",
+              color: "var(--ink)",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              fontSize: "0.65rem",
+            }}
+          >
+            Waitlist open
+          </span>
+        )}
+        {isActive && !isRevamp && (
           <span
             className="font-outfit text-xs font-medium px-2 py-0.5"
             style={{
@@ -361,6 +369,23 @@ function ProductCard({ product }: { product: Product }) {
       >
         {product.description}
       </p>
+      {isRevamp && product.waitlistIncludes && (
+        <ul className="space-y-2 mb-5" aria-label={`What's in ${product.title}`}>
+          {product.waitlistIncludes.map((item) => (
+            <li
+              key={item}
+              className="flex items-start gap-2 font-outfit font-light text-xs leading-relaxed"
+              style={{ color: "rgba(245,240,232,0.75)" }}
+            >
+              <span style={{ color: "var(--gold)" }} aria-hidden="true">
+                ✓
+              </span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+      {!isRevamp && (
       <div className="mb-4">
         <div className="flex items-center gap-3">
           {isActive ? (
@@ -396,14 +421,17 @@ function ProductCard({ product }: { product: Product }) {
           </div>
         )}
       </div>
+      )}
       {isRevamp ? (
-        <span
-          aria-disabled="true"
-          className="font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2"
-          style={{ color: "rgba(245,240,232,0.5)", cursor: "not-allowed" }}
-        >
-          Unavailable during revamp
-        </span>
+        <div>
+          <p
+            className="font-outfit text-sm font-medium mb-3"
+            style={{ color: "var(--cream)" }}
+          >
+            Join the waitlist for early access and the founding price.
+          </p>
+          <WaitlistForm source="products" />
+        </div>
       ) : (
         <a
           href={product.link}
@@ -423,12 +451,14 @@ function ProductCard({ product }: { product: Product }) {
           {product.linkLabel} →
         </a>
       )}
-      <p
-        className="font-outfit font-light text-xs mt-3"
-        style={{ color: "rgba(245,240,232,0.35)" }}
-      >
-        Checkout and refunds run through Gumroad.
-      </p>
+      {!isRevamp && (
+        <p
+          className="font-outfit font-light text-xs mt-3"
+          style={{ color: "rgba(245,240,232,0.35)" }}
+        >
+          Checkout and refunds run through Gumroad.
+        </p>
+      )}
       {product.proof && product.proof.length > 0 && (
         <div
           className="mt-6 pt-5"
@@ -438,7 +468,6 @@ function ProductCard({ product }: { product: Product }) {
         </div>
       )}
       </div>
-      {isRevamp && <RevampOverlay />}
     </div>
   );
 }
