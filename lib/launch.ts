@@ -11,6 +11,9 @@ export const FOUNDING_PERCENT_OFF = Math.round(
   ((REGULAR_PRICE - FOUNDING_PRICE) / REGULAR_PRICE) * 100
 );
 
+/** How long waitlist members have to claim the founding price after launch. */
+export const FOUNDING_WINDOW_DAYS = 7;
+
 export const WAITLIST_PATH = "/waitlist";
 /** Deep link that opens the waitlist page with the email box focused. */
 export const WAITLIST_JOIN_PATH = "/waitlist#join";

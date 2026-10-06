@@ -3,7 +3,12 @@ import Link from "next/link";
 import LaunchCountdown from "@/components/LaunchCountdown";
 import FoundingPrice from "@/components/FoundingPrice";
 import WaitlistForm from "@/components/WaitlistForm";
-import { LAUNCH_LABEL, PROTOCOL_INCLUDES, REGULAR_PRICE } from "@/lib/launch";
+import {
+  FOUNDING_WINDOW_DAYS,
+  LAUNCH_LABEL,
+  PROTOCOL_INCLUDES,
+  REGULAR_PRICE,
+} from "@/lib/launch";
 
 export const metadata: Metadata = {
   title: "Mitch Protocol Waitlist — Zae Smiles",
@@ -80,7 +85,7 @@ export default function WaitlistPage() {
               className="font-outfit font-light text-sm mt-3"
               style={{ color: "rgba(245,240,232,0.6)" }}
             >
-              Founding price is for waitlist members at launch. After that it&apos;s ${REGULAR_PRICE}.
+              Waitlist members get {FOUNDING_WINDOW_DAYS} days from launch to claim the founding price. Your link arrives by email on launch day. After that it&apos;s ${REGULAR_PRICE}.
             </p>
           </div>
 
