@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import WaitlistBanner from "@/components/WaitlistBanner";
 import TrackerSection from "@/components/TrackerSection";
 import FreeResourcesTeaser from "@/components/FreeResourcesTeaser";
 import GuideFinderQuiz from "@/components/GuideFinderQuiz";
@@ -10,7 +11,10 @@ import Socials from "@/components/Socials";
 export default function Home() {
   return (
     <>
-      <Hero />
+      <div className="relative">
+        <WaitlistBanner />
+        <Hero />
+      </div>
       <TrackerSection />
       <GuideFinderQuiz />
       <FreeResourcesTeaser />

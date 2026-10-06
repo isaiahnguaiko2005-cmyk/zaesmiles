@@ -1,14 +1,28 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 type Status = "idle" | "sending" | "done" | "error";
 
-export default function WaitlistForm({ source = "products" }: { source?: string }) {
+export default function WaitlistForm({
+  source = "products",
+  focusOnHash = false,
+}: {
+  source?: string;
+  focusOnHash?: boolean;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [email, setEmail] = useState("");
   const [trap, setTrap] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
+
+  // A link ending in #join opens the page with the email box ready to type in.
+  useEffect(() => {
+    if (focusOnHash && window.location.hash === "#join") {
+      inputRef.current?.focus({ preventScroll: true });
+    }
+  }, [focusOnHash]);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -56,6 +70,7 @@ export default function WaitlistForm({ source = "products" }: { source?: string 
           inputMode="email"
           autoComplete="email"
           required
+          ref={inputRef}
           placeholder="your@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

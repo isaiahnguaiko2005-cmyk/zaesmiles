@@ -1,8 +1,10 @@
-// Adds an email to the Mitch Protocol waitlist in MailerLite.
-// Needs MAILERLITE_API_KEY in the environment; MAILERLITE_GROUP_ID is optional
-// but recommended so waitlist signups land in their own group.
+// Adds an email to the Mitch Protocol waitlist form in Kit (formerly ConvertKit).
+// Env vars (set in Vercel for Production and Preview):
+//   KIT_API_KEY  - Kit API key (Settings > Developer)
+//   KIT_FORM_ID  - numeric ID of the Kit form that collects the waitlist
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const KIT_BASE = "https://api.kit.com/v4";
 
 export async function POST(request: Request) {
   try {
@@ -13,33 +15,42 @@ export async function POST(request: Request) {
       return Response.json({ ok: true });
     }
 
-    if (typeof email !== "string" || !EMAIL_RE.test(email.trim()) || email.length > 254) {
+    if (typeof email !== "string" || email.length > 254 || !EMAIL_RE.test(email.trim())) {
       return Response.json({ error: "Enter a valid email address." }, { status: 400 });
     }
 
-    const apiKey = process.env.MAILERLITE_API_KEY;
-    if (!apiKey) {
+    const apiKey = process.env.KIT_API_KEY;
+    const formId = process.env.KIT_FORM_ID;
+    if (!apiKey || !formId) {
       return Response.json({ error: "Server not configured." }, { status: 500 });
     }
 
-    const groupId = process.env.MAILERLITE_GROUP_ID;
-    const res = await fetch("https://connect.mailerlite.com/api/subscribers", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        email: email.trim().toLowerCase(),
-        ...(groupId ? { groups: [groupId] } : {}),
-      }),
-    });
+    const headers = {
+      "X-Kit-Api-Key": apiKey,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+    const email_address = email.trim().toLowerCase();
 
-    // 200 = existing subscriber updated, 201 = created. Both are success for the visitor.
-    if (!res.ok) {
-      const errBody = await res.text();
-      console.error("MailerLite subscribe failed", res.status, errBody);
+    // 1) Create (or find) the subscriber. Kit requires they exist before joining a form.
+    const created = await fetch(`${KIT_BASE}/subscribers`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ email_address }),
+    });
+    if (!created.ok) {
+      console.error("Kit create subscriber failed", created.status, await created.text());
+      return Response.json({ error: "Something went wrong. Try again." }, { status: 502 });
+    }
+
+    // 2) Add them to the waitlist form.
+    const added = await fetch(`${KIT_BASE}/forms/${encodeURIComponent(formId)}/subscribers`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ email_address }),
+    });
+    if (!added.ok) {
+      console.error("Kit add to form failed", added.status, await added.text());
       return Response.json({ error: "Something went wrong. Try again." }, { status: 502 });
     }
 

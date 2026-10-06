@@ -4,7 +4,16 @@ import productsData from "../data/products.json";
 import { useCountdown } from "../lib/useCountdown";
 import ReviewRotator, { RotatorItem } from "./ReviewRotator";
 import Reveal from "./Reveal";
+import Link from "next/link";
 import WaitlistForm from "./WaitlistForm";
+import FoundingPrice from "./FoundingPrice";
+import {
+  FOUNDING_PERCENT_OFF,
+  LAUNCH_LABEL,
+  PROTOCOL_INCLUDES,
+  WAITLIST_JOIN_PATH,
+  WAITLIST_PATH,
+} from "../lib/launch";
 
 type Product = {
   id: string;
@@ -22,7 +31,6 @@ type Product = {
   proof?: RotatorItem[];
   premium?: boolean;
   underRevamp?: boolean;
-  waitlistIncludes?: string[];
 };
 
 const UNMONITORED_PHASES = [
@@ -100,6 +108,39 @@ export default function Products() {
         >
           Paid systems built to fix social anxiety at the root.
         </p>
+
+        <Link
+          href={WAITLIST_JOIN_PATH}
+          className="group flex items-center justify-between gap-4 flex-wrap mb-10 px-6 py-4 focus:outline-none transition-colors duration-200"
+          style={{
+            backgroundColor: "var(--ink)",
+            border: "1px solid var(--gold)",
+            minHeight: "56px",
+          }}
+          onFocus={(e) => {
+            (e.currentTarget as HTMLElement).style.outline = "2px solid var(--gold)";
+            (e.currentTarget as HTMLElement).style.outlineOffset = "3px";
+          }}
+          onBlur={(e) => {
+            (e.currentTarget as HTMLElement).style.outline = "none";
+          }}
+        >
+          <span className="font-outfit text-sm" style={{ color: "var(--cream)" }}>
+            <span
+              className="font-medium uppercase tracking-widest text-xs mr-3"
+              style={{ color: "var(--gold)" }}
+            >
+              Waitlist open
+            </span>
+            The Mitch Protocol launches {LAUNCH_LABEL}. Waitlist members get {FOUNDING_PERCENT_OFF}% off.
+          </span>
+          <span
+            className="font-outfit text-sm font-medium uppercase tracking-wide transition-transform duration-200 group-hover:translate-x-1"
+            style={{ color: "var(--gold)" }}
+          >
+            Join the waitlist &rarr;
+          </span>
+        </Link>
 
         {/* UNMONITORED flagship card */}
         <Reveal
@@ -303,7 +344,8 @@ function ProductCard({ product }: { product: Product }) {
 
   return (
     <div
-      className={`relative overflow-hidden p-6 flex flex-col transition-transform duration-200${
+      id={isRevamp ? "mitch-protocol" : undefined}
+      className={`relative overflow-hidden p-6 flex flex-col scroll-mt-28 transition-transform duration-200${
         isRevamp ? "" : " hover:-translate-y-1"
       }${product.premium && !isRevamp ? " premium-glow" : ""}`}
       style={{
@@ -369,9 +411,9 @@ function ProductCard({ product }: { product: Product }) {
       >
         {product.description}
       </p>
-      {isRevamp && product.waitlistIncludes && (
+      {isRevamp && (
         <ul className="space-y-2 mb-5" aria-label={`What's in ${product.title}`}>
-          {product.waitlistIncludes.map((item) => (
+          {PROTOCOL_INCLUDES.map((item) => (
             <li
               key={item}
               className="flex items-start gap-2 font-outfit font-light text-xs leading-relaxed"
@@ -384,6 +426,11 @@ function ProductCard({ product }: { product: Product }) {
             </li>
           ))}
         </ul>
+      )}
+      {isRevamp && (
+        <div className="mb-5">
+          <FoundingPrice />
+        </div>
       )}
       {!isRevamp && (
       <div className="mb-4">
@@ -431,6 +478,13 @@ function ProductCard({ product }: { product: Product }) {
             Join the waitlist for early access and the founding price.
           </p>
           <WaitlistForm source="products" />
+          <Link
+            href={WAITLIST_PATH}
+            className="story-link inline-block font-outfit text-xs mt-3"
+            style={{ color: "var(--gold)" }}
+          >
+            Launch details and countdown
+          </Link>
         </div>
       ) : (
         <a
