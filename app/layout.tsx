@@ -5,6 +5,10 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import StickyCTA from "@/components/StickyCTA";
 
+// Live site URL. Link previews (og:image etc.) are built from this, so it must be a
+// domain that actually resolves. Swap to the custom domain once one is bought.
+const SITE_URL = "https://zaesmiles.vercel.app";
+
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -18,7 +22,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://zaesmiles.com"),
+  metadataBase: new URL(SITE_URL),
   title: "Zae Smiles — UNMONITORED",
   description:
     "Stop monitoring yourself. Start being in the room. UNMONITORED is a 90-day recalibration system for social anxiety.",
@@ -26,7 +30,7 @@ export const metadata: Metadata = {
     title: "Zae Smiles — UNMONITORED",
     description:
       "Social anxiety is not a personality trait. It is a calibration problem. I built UNMONITORED to fix it at the source.",
-    url: "https://zaesmiles.com",
+    url: SITE_URL,
     siteName: "Zae Smiles",
   },
 };

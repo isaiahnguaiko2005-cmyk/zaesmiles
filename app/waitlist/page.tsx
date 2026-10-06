@@ -14,6 +14,12 @@ export const metadata: Metadata = {
   title: "Mitch Protocol Waitlist — Zae Smiles",
   description:
     "Join the waitlist for The Mitch Protocol and get early access plus the founding price.",
+  openGraph: {
+    title: "The Mitch Protocol Waitlist — Zae Smiles",
+    description:
+      "The complete system for stepping into your most socially confident self. Join the waitlist for early access and the founding price.",
+    url: "/waitlist",
+  },
 };
 
 function Check() {
