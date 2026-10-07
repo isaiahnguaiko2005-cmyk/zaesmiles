@@ -4,6 +4,7 @@
 /** Launch moment: Oct 19, 2026, 9:00 AM Eastern (EDT, UTC-4). */
 export const LAUNCH_AT = "2026-10-19T09:00:00-04:00";
 export const LAUNCH_LABEL = "Oct 19";
+export const LAUNCH_TIME_LABEL = "9:00 AM Eastern";
 
 export const FOUNDING_PRICE = 24;
 export const REGULAR_PRICE = 32;

@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { LAUNCH_LABEL, LAUNCH_TIME_LABEL } from "@/lib/launch";
 
 type Status = "idle" | "sending" | "done" | "error";
 
@@ -38,7 +39,9 @@ export default function WaitlistForm({
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Something went wrong. Try again.");
       setStatus("done");
-      setMessage("You're on the list. Watch your inbox for early access.");
+      setMessage(
+        `You're on the list. Your founding-price link arrives by email on ${LAUNCH_LABEL} at ${LAUNCH_TIME_LABEL}.`
+      );
       setEmail("");
     } catch (err) {
       setStatus("error");
