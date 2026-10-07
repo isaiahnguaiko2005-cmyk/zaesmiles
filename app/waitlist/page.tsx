@@ -6,7 +6,7 @@ import WaitlistForm from "@/components/WaitlistForm";
 import {
   FOUNDING_WINDOW_DAYS,
   LAUNCH_LABEL,
-  PROTOCOL_INCLUDES,
+  PROTOCOL_PARTS,
   REGULAR_PRICE,
 } from "@/lib/launch";
 
@@ -104,27 +104,40 @@ export default function WaitlistPage() {
           <WaitlistForm source="waitlist-page" focusOnHash />
         </div>
 
-        <div className="mt-12 text-left max-w-xl mx-auto">
+        <div className="mt-14 text-left max-w-2xl mx-auto">
           <h2
-            className="font-outfit text-xs uppercase tracking-widest font-medium mb-4 text-center"
-            style={{ color: "var(--gold)" }}
+            className="font-cormorant font-semibold text-3xl mb-8 text-center"
+            style={{ color: "var(--cream)" }}
           >
             What&apos;s inside
           </h2>
-          <ul className="space-y-3">
-            {PROTOCOL_INCLUDES.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-3 font-outfit font-light text-sm leading-relaxed"
-                style={{ color: "rgba(245,240,232,0.8)" }}
-              >
-                <span style={{ color: "var(--gold)" }}>
-                  <Check />
-                </span>
-                {item}
-              </li>
+          <div className="space-y-8">
+            {PROTOCOL_PARTS.map((part) => (
+              <section key={part.title} aria-labelledby={`part-${part.title}`}>
+                <h3
+                  id={`part-${part.title}`}
+                  className="font-outfit text-xs uppercase tracking-widest font-medium mb-4"
+                  style={{ color: "var(--gold)" }}
+                >
+                  {part.title}
+                </h3>
+                <ul className="space-y-3">
+                  {part.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 font-outfit font-light text-sm leading-relaxed"
+                      style={{ color: "rgba(245,240,232,0.8)" }}
+                    >
+                      <span style={{ color: "var(--gold)" }}>
+                        <Check />
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </section>
             ))}
-          </ul>
+          </div>
         </div>
 
         <p className="font-outfit font-light text-sm mt-12" style={{ color: "rgba(245,240,232,0.5)" }}>
