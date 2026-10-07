@@ -40,7 +40,7 @@ export default function WaitlistForm({
       if (!res.ok) throw new Error(data.error || "Something went wrong. Try again.");
       setStatus("done");
       setMessage(
-        `You're on the list. Your founding-price link arrives by email on ${LAUNCH_LABEL} at ${LAUNCH_TIME_LABEL}.`
+        `You're on the list. Your founding-price link arrives by email on ${LAUNCH_LABEL} at ${LAUNCH_TIME_LABEL}. Check your spam or promotions folder for a confirmation email and mark it "not spam" so it reaches you.`
       );
       setEmail("");
     } catch (err) {
