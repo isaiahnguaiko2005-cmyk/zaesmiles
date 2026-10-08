@@ -14,8 +14,9 @@ const teaserProducts = [
   {
     title: "The Mitch Protocol",
     tag: "Conversational System",
-    description: "5 real conversations broken down move by move.",
-    price: "$2.99",
+    description:
+      "The complete system for stepping into your most socially confident self, until Mitch is just you.",
+    price: "Waitlist open",
   },
 ];
 
