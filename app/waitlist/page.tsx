@@ -7,6 +7,7 @@ import {
   FOUNDING_WINDOW_DAYS,
   LAUNCH_LABEL,
   PROTOCOL_PARTS,
+  PROTOCOL_TERMS,
   REGULAR_PRICE,
 } from "@/lib/launch";
 
@@ -102,6 +103,68 @@ export default function WaitlistPage() {
             Join the waitlist for early access and the founding price.
           </h2>
           <WaitlistForm source="waitlist-page" focusOnHash />
+        </div>
+
+        <div className="mt-16 text-left">
+          <h2
+            className="font-cormorant font-semibold text-3xl mb-3 text-center"
+            style={{ color: "var(--cream)" }}
+          >
+            The pieces, in plain language
+          </h2>
+          <p
+            className="font-outfit font-light text-center mx-auto mb-8"
+            style={{ color: "rgba(245,240,232,0.7)", maxWidth: "34rem", fontSize: "1rem" }}
+          >
+            Nothing here is a term you&apos;ve heard before. Here&apos;s what each one is and what it
+            teaches you.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {PROTOCOL_TERMS.map((term) => (
+              <article
+                key={term.name}
+                className="p-5"
+                style={{
+                  backgroundColor: "var(--ink2)",
+                  borderLeft: "2px solid var(--gold)",
+                  border: "1px solid rgba(196,160,106,0.25)",
+                  borderLeftWidth: "2px",
+                  borderLeftColor: "var(--gold)",
+                }}
+              >
+                <h3
+                  className="font-cormorant font-semibold text-2xl mb-1"
+                  style={{ color: "var(--gold)" }}
+                >
+                  {term.name}
+                </h3>
+                <p
+                  className="font-outfit font-medium text-sm mb-3"
+                  style={{ color: "var(--cream)" }}
+                >
+                  {term.tagline}
+                </p>
+                <p
+                  className="font-outfit font-light leading-relaxed mb-3"
+                  style={{ color: "rgba(245,240,232,0.8)", fontSize: "0.9375rem" }}
+                >
+                  {term.what}
+                </p>
+                <p
+                  className="font-outfit font-light leading-relaxed"
+                  style={{ color: "rgba(245,240,232,0.8)", fontSize: "0.9375rem" }}
+                >
+                  <span
+                    className="font-medium uppercase tracking-widest text-xs mr-2"
+                    style={{ color: "var(--gold)" }}
+                  >
+                    You learn
+                  </span>
+                  {term.teaches}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
 
         <div className="mt-14 text-left max-w-2xl mx-auto">
