@@ -116,55 +116,40 @@ export default function WaitlistPage() {
             className="font-outfit font-light text-center mx-auto mb-8"
             style={{ color: "rgba(245,240,232,0.7)", maxWidth: "34rem", fontSize: "1rem" }}
           >
-            Nothing here is a term you&apos;ve heard before. Here&apos;s what each one is and what it
-            teaches you.
+            Here&apos;s what each term means, in one line.
           </p>
-          <div className="grid sm:grid-cols-2 gap-4">
+          <dl className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
             {PROTOCOL_TERMS.map((term) => (
-              <article
+              <div
                 key={term.name}
-                className="p-5"
-                style={{
-                  backgroundColor: "var(--ink2)",
-                  borderLeft: "2px solid var(--gold)",
-                  border: "1px solid rgba(196,160,106,0.25)",
-                  borderLeftWidth: "2px",
-                  borderLeftColor: "var(--gold)",
-                }}
+                className="pl-4"
+                style={{ borderLeft: "2px solid var(--gold)" }}
               >
-                <h3
-                  className="font-cormorant font-semibold text-2xl mb-1"
+                <dt
+                  className="font-cormorant font-semibold text-2xl"
                   style={{ color: "var(--gold)" }}
                 >
                   {term.name}
-                </h3>
-                <p
-                  className="font-outfit font-medium text-sm mb-3"
-                  style={{ color: "var(--cream)" }}
-                >
-                  {term.tagline}
-                </p>
-                <p
-                  className="font-outfit font-light leading-relaxed mb-3"
-                  style={{ color: "rgba(245,240,232,0.8)", fontSize: "0.9375rem" }}
-                >
-                  {term.what}
-                </p>
-                <p
+                </dt>
+                <dd
                   className="font-outfit font-light leading-relaxed"
                   style={{ color: "rgba(245,240,232,0.8)", fontSize: "0.9375rem" }}
                 >
-                  <span
-                    className="font-medium uppercase tracking-widest text-xs mr-2"
-                    style={{ color: "var(--gold)" }}
-                  >
-                    You learn
-                  </span>
-                  {term.teaches}
-                </p>
-              </article>
+                  {term.line}
+                </dd>
+              </div>
             ))}
-          </div>
+          </dl>
+          <p
+            className="font-outfit font-light text-sm text-center mt-8"
+            style={{ color: "rgba(245,240,232,0.6)" }}
+          >
+            Want the five moves in full first? The free{" "}
+            <Link href="/guides" className="story-link" style={{ color: "var(--gold)" }}>
+              Mitch Effect guide
+            </Link>{" "}
+            covers them.
+          </p>
         </div>
 
         <div className="mt-14 text-left max-w-2xl mx-auto">

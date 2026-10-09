@@ -68,54 +68,23 @@ export const PROTOCOL_PARTS: { title: string; items: string[] }[] = [
   },
 ];
 
-/** Plain-language explanations of the Protocol's own terms. Also used for the welcome email. */
-export const PROTOCOL_TERMS: { name: string; tagline: string; what: string; teaches: string }[] = [
+/** One-line explanations of the Protocol's own terms. Full teaching stays in the paid guide. */
+export const PROTOCOL_TERMS: { name: string; line: string }[] = [
   {
     name: "Mitch",
-    tagline: "The version of you that isn't checking himself.",
-    what: "Mitch is a name for you with the review step turned off: the you that talks easily around your cousin or at 1am with two people you trust. It's a switch, not a costume. The name gives you permission to move before the self-editing finishes.",
-    teaches: "How to step into that version of you on purpose, then rely on the name less until Mitch is just you.",
+    line: "The version of you that isn't second-guessing, and the name that lets you step into it on purpose.",
   },
-  {
-    name: "OPEN",
-    tagline: "Say the first thing.",
-    what: "Point out something you can both see and add one small opinion. An opener isn't supposed to be impressive. It's supposed to be easy to answer.",
-    teaches: "How to start a conversation without waiting for a perfect line.",
-  },
-  {
-    name: "HOLD",
-    tagline: "Don't quit after one flat answer.",
-    what: "A short answer isn't a verdict. Stay one more beat: react, add a sentence, or ask one follow-up. Then read what comes back.",
-    teaches: "How to tell a person who's busy from a person who isn't interested, so you stop walking away too early.",
-  },
-  {
-    name: "PIVOT",
-    tagline: "Move from the room to the person.",
-    what: "Once they hand you anything real, read it playfully and ask a question only they can answer. It's the exit from talking about the line, the party or the weather.",
-    teaches: "How to avoid sounding like an interview and make it a real conversation.",
-  },
-  {
-    name: "SPARK",
-    tagline: "Follow their energy.",
-    what: "SPARK is a five-step loop you run while a topic has life in it: spot where their energy lifts, play their detail back, ask one layer deeper, relate in a sentence or two, and keep the thread alive.",
-    teaches: "How to turn small talk into a conversation people actually enjoy, and what to do when the energy drops.",
-  },
-  {
-    name: "Warmth dial",
-    tagline: "How warm and personal you go, and how fast.",
-    what: "You turn it up when the other person opens up and turn it down when they pull back, so you stay matched to them instead of too cold or too much.",
-    teaches: "How to set the right level of warmth for a friend, a crush, a coworker or a stranger.",
-  },
+  { name: "OPEN", line: "Say the first thing: name something you can both see and add one small opinion." },
+  { name: "HOLD", line: "Stay one more beat after a flat answer, then read what comes back." },
+  { name: "PIVOT", line: "Move from the room to the person with a question only they can answer." },
+  { name: "SPARK", line: "A five-step loop for following their energy and keeping a conversation alive." },
+  { name: "Warmth dial", line: "How warm and personal you go, and how fast, matched to how they respond." },
   {
     name: "BRIDGE",
-    tagline: "Turn a good conversation into a real connection.",
-    what: "Three parts, in order: a callback to something specific they said, a plan with an actual time attached, and an easy way for them to say no. Good conversations end, and nothing happens after them unless you make something happen.",
-    teaches: "How to leave with a number, a plan or a reason to talk again, for friendships and for romance.",
+    line: "Turn a good conversation into a plan: a callback, a specific time and an easy way to say no.",
   },
   {
     name: "Reading the room",
-    tagline: "Open, unclear or closed.",
-    what: "Every response falls into one of three groups. Open means extra detail, warmth or a question back. Unclear is brief but polite. Closed is repeated short answers and turning away.",
-    teaches: "How to stop guessing: keep going, hold one more beat, or leave politely.",
+    line: "Sort every response as open, unclear or closed, so you know whether to continue, hold or leave.",
   },
 ];
