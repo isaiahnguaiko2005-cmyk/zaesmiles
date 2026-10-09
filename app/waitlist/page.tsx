@@ -7,6 +7,7 @@ import {
   FOUNDING_WINDOW_DAYS,
   LAUNCH_LABEL,
   PROTOCOL_PARTS,
+  PROTOCOL_TERMS,
   REGULAR_PRICE,
 } from "@/lib/launch";
 
@@ -102,6 +103,53 @@ export default function WaitlistPage() {
             Join the waitlist for early access and the founding price.
           </h2>
           <WaitlistForm source="waitlist-page" focusOnHash />
+        </div>
+
+        <div className="mt-16 text-left">
+          <h2
+            className="font-cormorant font-semibold text-3xl mb-3 text-center"
+            style={{ color: "var(--cream)" }}
+          >
+            The pieces, in plain language
+          </h2>
+          <p
+            className="font-outfit font-light text-center mx-auto mb-8"
+            style={{ color: "rgba(245,240,232,0.7)", maxWidth: "34rem", fontSize: "1rem" }}
+          >
+            Here&apos;s what each term means, in one line.
+          </p>
+          <dl className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
+            {PROTOCOL_TERMS.map((term) => (
+              <div
+                key={term.name}
+                className="pl-4"
+                style={{ borderLeft: "2px solid var(--gold)" }}
+              >
+                <dt
+                  className="font-cormorant font-semibold text-2xl"
+                  style={{ color: "var(--gold)" }}
+                >
+                  {term.name}
+                </dt>
+                <dd
+                  className="font-outfit font-light leading-relaxed"
+                  style={{ color: "rgba(245,240,232,0.8)", fontSize: "0.9375rem" }}
+                >
+                  {term.line}
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <p
+            className="font-outfit font-light text-sm text-center mt-8"
+            style={{ color: "rgba(245,240,232,0.6)" }}
+          >
+            Want the five moves in full first? The free{" "}
+            <Link href="/guides" className="story-link" style={{ color: "var(--gold)" }}>
+              Mitch Effect guide
+            </Link>{" "}
+            covers them.
+          </p>
         </div>
 
         <div className="mt-14 text-left max-w-2xl mx-auto">

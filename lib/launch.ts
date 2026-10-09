@@ -67,3 +67,24 @@ export const PROTOCOL_PARTS: { title: string; items: string[] }[] = [
     ],
   },
 ];
+
+/** One-line explanations of the Protocol's own terms. Full teaching stays in the paid guide. */
+export const PROTOCOL_TERMS: { name: string; line: string }[] = [
+  {
+    name: "Mitch",
+    line: "The version of you that isn't second-guessing, and the name that lets you step into it on purpose.",
+  },
+  { name: "OPEN", line: "Say the first thing: name something you can both see and add one small opinion." },
+  { name: "HOLD", line: "Stay one more beat after a flat answer, then read what comes back." },
+  { name: "PIVOT", line: "Move from the room to the person with a question only they can answer." },
+  { name: "SPARK", line: "A five-step loop for following their energy and keeping a conversation alive." },
+  { name: "Warmth dial", line: "How warm and personal you go, and how fast, matched to how they respond." },
+  {
+    name: "BRIDGE",
+    line: "Turn a good conversation into a plan: a callback, a specific time and an easy way to say no.",
+  },
+  {
+    name: "Reading the room",
+    line: "Sort every response as open, unclear or closed, so you know whether to continue, hold or leave.",
+  },
+];
