@@ -207,6 +207,16 @@ figures:
 5. **`/plugin` slash command is unavailable in this desktop-app
    environment** — can't install marketplace skills/plugins (e.g. the user
    tried `ui-ux-pro-max-skill` from GitHub) from within this session.
+6. **Vercel build cache can strand a `next/font` class.** On 2026-10-11 the
+   deployed preview's HTML carried the previous build's Cormorant class
+   (`__variable_67a1af`) while the CSS defined the new one, so
+   `--font-cormorant` was empty and the logo plus every serif heading
+   silently rendered in Outfit. Local dev looked fine. After touching
+   `app/layout.tsx` or font config, check a deploy in authenticated Chrome:
+   `<html>`'s `__variable_*` classes must match the `.__variable_*` rules in
+   the stylesheet, and the logo's computed font must be Cormorant. Fix by
+   changing that font's call args (that's why Cormorant has an explicit
+   `display: "swap"`).
 
 ## Current deployment status
 
