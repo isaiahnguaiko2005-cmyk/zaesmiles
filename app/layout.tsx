@@ -13,6 +13,10 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-cormorant",
+  // Explicit (it's the default) so this font's build hash changes: Vercel's
+  // build cache had served HTML with the previous build's Cormorant class,
+  // leaving --font-cormorant empty and every serif heading in Outfit.
+  display: "swap",
 });
 
 const outfit = Outfit({
