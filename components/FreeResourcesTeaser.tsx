@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import guides from "@/data/guides.json";
 import Reveal from "./Reveal";
@@ -45,7 +43,7 @@ export default function FreeResourcesTeaser() {
             <Reveal key={guide.id} delay={i * 60}>
               <Link
                 href="/guides"
-                className="p-6 h-full flex flex-col transition-transform duration-200 hover:-translate-y-1"
+                className="card-lift p-6 h-full flex flex-col"
                 style={{
                   backgroundColor: "var(--ink2)",
                   border: guide.leadsTo
@@ -83,7 +81,7 @@ export default function FreeResourcesTeaser() {
                   className="font-outfit text-xs font-medium uppercase tracking-wide"
                   style={{ color: "var(--gold)" }}
                 >
-                  Download Free &rarr;
+                  Download Free&nbsp;&rarr;
                 </span>
               </Link>
             </Reveal>
@@ -93,16 +91,9 @@ export default function FreeResourcesTeaser() {
         <div className="text-center">
           <Link
             href="/guides"
-            className="story-link font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2 transition-all duration-200"
-            style={{ color: "var(--gold)" }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.color = "var(--cream)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.color = "var(--gold)";
-            }}
+            className="story-link link-gold font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2 py-2"
           >
-            See All Free Guides &rarr;
+            See All Free Guides&nbsp;&rarr;
           </Link>
         </div>
       </div>

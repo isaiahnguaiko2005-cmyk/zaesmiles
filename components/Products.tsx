@@ -7,6 +7,7 @@ import Reveal from "./Reveal";
 import Link from "next/link";
 import WaitlistForm from "./WaitlistForm";
 import FoundingPrice from "./FoundingPrice";
+import { CheckIcon } from "./SocialIcons";
 import {
   FOUNDING_PERCENT_OFF,
   LAUNCH_LABEL,
@@ -96,33 +97,26 @@ export default function Products() {
       style={{ backgroundColor: "var(--cream)" }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <h2
-          className="font-cormorant font-semibold text-3xl lg:text-4xl mb-2"
+        <h1
+          className="font-cormorant font-semibold text-4xl lg:text-5xl mb-2"
           style={{ color: "var(--ink)" }}
         >
           Products
-        </h2>
+        </h1>
         <p
           className="font-outfit font-light mb-10"
-          style={{ color: "rgba(12,15,20,0.5)" }}
+          style={{ color: "rgba(12,15,20,0.62)" }}
         >
           Paid systems built to fix social anxiety at the root.
         </p>
 
         <Link
           href={WAITLIST_JOIN_PATH}
-          className="group flex items-center justify-between gap-4 flex-wrap mb-10 px-6 py-4 focus:outline-none transition-colors duration-200"
+          className="card-lift group flex items-center justify-between gap-4 flex-wrap mb-10 px-6 py-4"
           style={{
             backgroundColor: "var(--ink)",
             border: "1px solid var(--gold)",
             minHeight: "56px",
-          }}
-          onFocus={(e) => {
-            (e.currentTarget as HTMLElement).style.outline = "2px solid var(--gold)";
-            (e.currentTarget as HTMLElement).style.outlineOffset = "3px";
-          }}
-          onBlur={(e) => {
-            (e.currentTarget as HTMLElement).style.outline = "none";
           }}
         >
           <span className="font-outfit text-sm" style={{ color: "var(--cream)" }}>
@@ -138,7 +132,7 @@ export default function Products() {
             className="font-outfit text-sm font-medium uppercase tracking-wide transition-transform duration-200 group-hover:translate-x-1"
             style={{ color: "var(--gold)" }}
           >
-            Join the waitlist &rarr;
+            Join the waitlist&nbsp;&rarr;
           </span>
         </Link>
 
@@ -198,31 +192,7 @@ export default function Products() {
                   href="https://isaiah60.gumroad.com/l/xdnsp"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97] focus:outline-none"
-                  style={{
-                    backgroundColor: "var(--gold)",
-                    color: "var(--ink)",
-                    padding: "14px 28px",
-                    minHeight: "48px",
-                    border: "1px solid var(--gold)",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
-                    (e.currentTarget as HTMLElement).style.color = "var(--gold)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(196,160,106,0.35)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.backgroundColor = "var(--gold)";
-                    (e.currentTarget as HTMLElement).style.color = "var(--ink)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                  }}
-                  onFocus={(e) => {
-                    (e.currentTarget as HTMLElement).style.outline = "2px solid var(--gold)";
-                    (e.currentTarget as HTMLElement).style.outlineOffset = "3px";
-                  }}
-                  onBlur={(e) => {
-                    (e.currentTarget as HTMLElement).style.outline = "none";
-                  }}
+                  className="btn btn-gold"
                 >
                   Get UNMONITORED
                 </a>
@@ -249,8 +219,8 @@ export default function Products() {
                   className="flex items-start gap-3 font-outfit font-light text-sm"
                   style={{ color: "rgba(245,240,232,0.8)" }}
                 >
-                  <span style={{ color: "var(--gold)" }} aria-hidden="true">
-                    ✓
+                  <span style={{ color: "var(--gold)" }}>
+                    <CheckIcon />
                   </span>
                   {item}
                 </li>
@@ -315,7 +285,7 @@ export default function Products() {
           >
             <span
               className="font-outfit text-xs uppercase tracking-widest font-medium mb-3 block"
-              style={{ color: "var(--sage)" }}
+              style={{ color: "var(--sage-deep)" }}
             >
               Coming Soon
             </span>
@@ -345,21 +315,12 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <div
       id={isRevamp ? "mitch-protocol" : undefined}
-      className={`relative overflow-hidden p-6 flex flex-col scroll-mt-28 transition-transform duration-200${
-        isRevamp ? "" : " hover:-translate-y-1"
+      className={`relative overflow-hidden p-6 flex flex-col scroll-mt-28${
+        isRevamp ? "" : " card-lift"
       }${product.premium && !isRevamp ? " premium-glow" : ""}`}
       style={{
         backgroundColor: "var(--ink)",
-        border: isActive ? "1px solid var(--gold)" : "1px solid rgba(196,160,106,0.25)",
-        transition: "border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
-      }}
-      onMouseEnter={(e) => {
-        if (isRevamp) return;
-        (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 28px rgba(196,160,106,0.2)";
-      }}
-      onMouseLeave={(e) => {
-        if (isRevamp) return;
-        (e.currentTarget as HTMLElement).style.boxShadow = "none";
+        border: isActive || isRevamp ? "1px solid var(--gold)" : "1px solid rgba(196,160,106,0.25)",
       }}
     >
       <div className="flex flex-col flex-1">
@@ -419,8 +380,8 @@ function ProductCard({ product }: { product: Product }) {
               className="flex items-start gap-2 font-outfit font-light text-xs leading-relaxed"
               style={{ color: "rgba(245,240,232,0.75)" }}
             >
-              <span style={{ color: "var(--gold)" }} aria-hidden="true">
-                ✓
+              <span style={{ color: "var(--gold)" }}>
+                <CheckIcon size={14} />
               </span>
               {item}
             </li>
@@ -480,8 +441,7 @@ function ProductCard({ product }: { product: Product }) {
           <WaitlistForm source="products" />
           <Link
             href={WAITLIST_PATH}
-            className="story-link inline-block font-outfit text-xs mt-3"
-            style={{ color: "var(--gold)" }}
+            className="story-link link-gold inline-block font-outfit text-xs mt-3 py-1"
           >
             Launch details and countdown
           </Link>
@@ -491,18 +451,10 @@ function ProductCard({ product }: { product: Product }) {
           href={product.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2 focus:outline-none"
-          style={{ color: "var(--cream)" }}
-          aria-label={`${product.linkLabel} — ${product.title}`}
-          onFocus={(e) => {
-            (e.currentTarget as HTMLElement).style.outline = "2px solid var(--gold)";
-            (e.currentTarget as HTMLElement).style.outlineOffset = "3px";
-          }}
-          onBlur={(e) => {
-            (e.currentTarget as HTMLElement).style.outline = "none";
-          }}
+          className="link-cream font-outfit text-sm font-medium uppercase tracking-wide inline-flex items-center gap-2 min-h-[44px]"
+          aria-label={`${product.linkLabel}: ${product.title} (opens in new tab)`}
         >
-          {product.linkLabel} →
+          {product.linkLabel}&nbsp;&rarr;
         </a>
       )}
       {!isRevamp && (

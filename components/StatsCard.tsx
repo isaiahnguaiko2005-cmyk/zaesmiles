@@ -137,16 +137,16 @@ function StatBox({
         </span>
         {isLeader && (
           <span
-            className="font-outfit text-xs"
+            className="inline-flex items-center gap-1.5 font-outfit text-xs"
             style={{ color: "var(--gold)" }}
-            aria-label="Currently leading platform"
           >
-            ● Leading
+            <span aria-hidden="true" className="block w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "var(--gold)" }} />
+            Leading
           </span>
         )}
       </div>
       <div
-        className="font-cormorant text-3xl font-semibold"
+        className="font-cormorant text-3xl font-semibold tabular"
         style={{ color: "var(--cream)" }}
         aria-label={`${label}: ${displayValue}`}
       >
@@ -154,10 +154,10 @@ function StatBox({
       </div>
       {delta !== 0 && (
         <div
-          className="font-outfit text-xs mt-1"
-          style={{ color: "var(--sage)" }}
+          className="font-outfit text-xs mt-1 tabular"
+          style={{ color: delta > 0 ? "var(--sage)" : "rgba(245,240,232,0.5)" }}
         >
-          {delta > 0 ? "+" : "-"}
+          {delta > 0 ? "+" : "−"}
           {formatDelta(delta, format)} this week
         </div>
       )}
@@ -250,7 +250,7 @@ export default function StatsCard({
           className="font-outfit text-xs uppercase tracking-wider"
           style={{ color: "rgba(245,240,232,0.45)" }}
         >
-          {loading ? "Updating..." : "Live Tracker"}
+          {loading ? "Updating…" : "Live Tracker"}
         </span>
       </div>
 

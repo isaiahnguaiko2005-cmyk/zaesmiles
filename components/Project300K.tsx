@@ -71,30 +71,9 @@ export default function Project300K() {
               href="https://discord.gg/vWhm6srVqz"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all mt-8 focus:outline-none"
-              style={{
-                border: "1px solid var(--gold)",
-                color: "var(--cream)",
-                padding: "14px 28px",
-                minHeight: "48px",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = "var(--gold)";
-                (e.currentTarget as HTMLElement).style.color = "var(--ink)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
-                (e.currentTarget as HTMLElement).style.color = "var(--cream)";
-              }}
-              onFocus={(e) => {
-                (e.currentTarget as HTMLElement).style.outline = "2px solid var(--gold)";
-                (e.currentTarget as HTMLElement).style.outlineOffset = "3px";
-              }}
-              onBlur={(e) => {
-                (e.currentTarget as HTMLElement).style.outline = "none";
-              }}
+              className="btn btn-outline mt-8"
             >
-              Follow the Build &rarr;
+              Follow the Build&nbsp;&rarr;
             </a>
           </div>
 

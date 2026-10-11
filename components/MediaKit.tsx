@@ -4,6 +4,7 @@ import Reveal from "./Reveal";
 import CountUpNumber from "./CountUpNumber";
 import BrandMarquee from "./BrandMarquee";
 import { partners } from "@/data/partners";
+import { CheckIcon } from "./SocialIcons";
 
 const stats: { value: string; label: string; icon: "people" | "eye" | "heart" | "trending" }[] = [
   { value: "12.2K+", label: "Combined Followers", icon: "people" },
@@ -167,7 +168,7 @@ export default function MediaKit() {
         {/* Header */}
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
-          style={{ color: "var(--gold)" }}
+          style={{ color: "var(--gold-deep)" }}
         >
           Media Kit
         </span>
@@ -190,41 +191,15 @@ export default function MediaKit() {
         <div className="flex flex-wrap gap-4 mb-16">
           <a
             href="mailto:isaiahnguaiko6@gmail.com"
-            className="inline-flex items-center justify-center gap-2 font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
-            style={{
-              backgroundColor: "var(--ink)",
-              color: "var(--cream)",
-              padding: "14px 28px",
-              minHeight: "48px",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(12,15,20,0.25)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.boxShadow = "none";
-            }}
+            className="btn btn-ink gap-2"
           >
-            Get in Touch &rarr;
+            Get in Touch&nbsp;&rarr;
           </a>
           <a
             href="https://canva.link/cqq4b3dqwf0xrzm"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
-            style={{
-              border: "1px solid var(--ink)",
-              color: "var(--ink)",
-              padding: "14px 28px",
-              minHeight: "48px",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundColor = "var(--ink)";
-              (e.currentTarget as HTMLElement).style.color = "var(--cream)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
-              (e.currentTarget as HTMLElement).style.color = "var(--ink)";
-            }}
+            className="btn btn-ink-outline"
           >
             View Portfolio
           </a>
@@ -235,7 +210,7 @@ export default function MediaKit() {
           {stats.map((stat, i) => (
             <Reveal key={stat.label} delay={i * 60}>
               <div
-                className="p-6 text-center transition-transform duration-200 hover:-translate-y-1"
+                className="card-lift p-6 text-center h-full"
                 style={{ backgroundColor: "var(--ink)", border: "1px solid rgba(196,160,106,0.3)" }}
               >
                 <div className="flex justify-center mb-3" style={{ color: "var(--gold)" }}>
@@ -268,7 +243,7 @@ export default function MediaKit() {
           <div>
             <span
               className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
-              style={{ color: "var(--sage)" }}
+              style={{ color: "var(--sage-deep)" }}
             >
               Age (Instagram)
             </span>
@@ -279,7 +254,7 @@ export default function MediaKit() {
           <div>
             <span
               className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
-              style={{ color: "var(--sage)" }}
+              style={{ color: "var(--sage-deep)" }}
             >
               Gender
             </span>
@@ -299,7 +274,7 @@ export default function MediaKit() {
           <div>
             <span
               className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
-              style={{ color: "var(--sage)" }}
+              style={{ color: "var(--sage-deep)" }}
             >
               Top Countries
             </span>
@@ -367,8 +342,8 @@ export default function MediaKit() {
                 className="flex items-start gap-3 font-outfit font-light text-sm leading-relaxed"
                 style={{ color: "var(--ink)" }}
               >
-                <span style={{ color: "var(--gold)" }} aria-hidden="true">
-                  &#10003;
+                <span style={{ color: "var(--gold-deep)" }}>
+                  <CheckIcon />
                 </span>
                 {point}
               </li>
@@ -379,7 +354,7 @@ export default function MediaKit() {
         {/* Partners + portfolio */}
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
-          style={{ color: "var(--sage)" }}
+          style={{ color: "var(--sage-deep)" }}
         >
           Brand Partners
         </span>
@@ -407,26 +382,10 @@ export default function MediaKit() {
               href="https://canva.link/cqq4b3dqwf0xrzm"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97] focus:outline-none flex-shrink-0"
-              style={{
-                border: "1px solid var(--gold)",
-                color: "var(--cream)",
-                padding: "14px 28px",
-                minHeight: "48px",
-              }}
-              aria-label="View UGC Portfolio — opens in new tab"
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = "var(--gold)";
-                (e.currentTarget as HTMLElement).style.color = "var(--ink)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(196,160,106,0.35)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
-                (e.currentTarget as HTMLElement).style.color = "var(--cream)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
-              }}
+              className="btn btn-outline flex-shrink-0"
+              aria-label="View UGC Portfolio, opens in new tab"
             >
-              View Portfolio &rarr;
+              View Portfolio&nbsp;&rarr;
             </a>
           </div>
         </div>
@@ -453,30 +412,16 @@ export default function MediaKit() {
           </span>
           <a
             href="mailto:isaiahnguaiko6@gmail.com"
-            className="font-cormorant font-semibold block mb-8 transition-colors focus:outline-none"
-            style={{ color: "var(--cream)", fontSize: "clamp(1.35rem, 3.5vw, 2rem)" }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--gold)")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--cream)")}
+            className="link-cream font-cormorant font-semibold inline-block mb-8 break-all"
+            style={{ fontSize: "clamp(1.35rem, 3.5vw, 2rem)" }}
           >
             isaiahnguaiko6@gmail.com
           </a>
           <a
             href="mailto:isaiahnguaiko6@gmail.com"
-            className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97] focus:outline-none"
-            style={{
-              backgroundColor: "var(--gold)",
-              color: "var(--ink)",
-              padding: "14px 28px",
-              minHeight: "48px",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(196,160,106,0.35)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.boxShadow = "none";
-            }}
+            className="btn btn-gold"
           >
-            Email Me &rarr;
+            Email Me&nbsp;&rarr;
           </a>
           <div className="mt-6 space-y-1">
             <p className="font-outfit font-light text-sm" style={{ color: "rgba(245,240,232,0.45)" }}>

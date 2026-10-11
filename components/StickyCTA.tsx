@@ -4,10 +4,19 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const DISMISS_KEY = "zs-sticky-cta-dismissed";
+
 export default function StickyCTA() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+
+  // A dismissal holds for the rest of the visit instead of reappearing on every page.
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem(DISMISS_KEY) === "1") setDismissed(true);
+    } catch {}
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -22,17 +31,27 @@ export default function StickyCTA() {
   if (pathname === "/guides") return null;
   if (dismissed) return null;
 
+  const dismiss = () => {
+    setDismissed(true);
+    try {
+      sessionStorage.setItem(DISMISS_KEY, "1");
+    } catch {}
+  };
+
   return (
     <div
-      className="fixed bottom-5 right-5 z-40 transition-all duration-300"
+      className="fixed z-40 transition-[opacity,transform] duration-300 ease-out"
       style={{
+        right: "max(1.25rem, env(safe-area-inset-right))",
+        bottom: "max(1.25rem, env(safe-area-inset-bottom))",
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(12px)",
         pointerEvents: visible ? "auto" : "none",
       }}
+      aria-hidden={!visible}
     >
       <div
-        className="flex items-center gap-1 pl-1 pr-1"
+        className="flex items-center pl-1"
         style={{
           backgroundColor: "var(--ink2)",
           border: "1px solid var(--gold)",
@@ -41,28 +60,17 @@ export default function StickyCTA() {
       >
         <Link
           href="/guides"
-          className="font-outfit text-xs font-medium uppercase tracking-wide transition-colors duration-200"
-          style={{ color: "var(--cream)", padding: "12px 16px", minHeight: "44px", display: "inline-flex", alignItems: "center" }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.color = "var(--gold)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.color = "var(--cream)";
-          }}
+          tabIndex={visible ? 0 : -1}
+          className="link-cream font-outfit text-xs font-medium uppercase tracking-wide inline-flex items-center min-h-[44px] px-4"
         >
-          Free Guides &rarr;
+          Free Guides&nbsp;&rarr;
         </Link>
         <button
-          onClick={() => setDismissed(true)}
-          aria-label="Dismiss"
-          className="flex items-center justify-center transition-colors duration-200 focus:outline-none"
-          style={{ width: "36px", height: "36px", color: "rgba(245,240,232,0.4)" }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.color = "var(--cream)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.color = "rgba(245,240,232,0.4)";
-          }}
+          type="button"
+          onClick={dismiss}
+          tabIndex={visible ? 0 : -1}
+          aria-label="Hide the Free Guides shortcut"
+          className="link-muted flex items-center justify-center w-11 h-11"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <path d="M18 6 6 18M6 6l12 12" />

@@ -22,7 +22,7 @@ export default function WaitlistBanner() {
           {FOUNDING_PERCENT_OFF}% off founding price &middot; launches {LAUNCH_LABEL}{" "}
           <LaunchCountdownInline />
         </span>
-        <span className="font-medium underline underline-offset-2">Join &rarr;</span>
+        <span className="font-medium underline underline-offset-2">Join&nbsp;&rarr;</span>
       </Link>
     </div>
   );

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
@@ -17,9 +17,15 @@ const cormorant = Cormorant_Garamond({
 
 const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  // 600 is the hero headline weight; without it the browser fakes bold.
+  weight: ["300", "400", "500", "600"],
   variable: "--font-outfit",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#0C0F14",
+  colorScheme: "dark",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -33,6 +39,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "Zae Smiles",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
@@ -51,7 +58,9 @@ export default function RootLayout({
           Skip to main content
         </a>
         <Nav />
-        <main id="main-content">{children}</main>
+        <main id="main-content" tabIndex={-1} className="outline-none">
+          {children}
+        </main>
         <Footer />
         <StickyCTA />
       </body>

@@ -59,7 +59,8 @@ export default function TrackerSection() {
               border: "1px solid rgba(196,160,106,0.3)",
               height: "340px",
             }}
-            aria-label="Loading stats..."
+            role="status"
+            aria-label="Loading live stats…"
           />
         ) : (
           <Reveal>
@@ -90,16 +91,9 @@ export default function TrackerSection() {
             <div className="mt-6 text-center">
               <Link
                 href="/about"
-                className="story-link font-outfit text-sm font-medium uppercase tracking-wide transition-colors duration-200"
-                style={{ color: "var(--gold)" }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "var(--cream)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "var(--gold)";
-                }}
+                className="story-link link-gold font-outfit text-sm font-medium uppercase tracking-wide py-2"
               >
-                Follow the Full Project 300K Story &rarr;
+                Follow the Full Project 300K Story&nbsp;&rarr;
               </Link>
             </div>
           </Reveal>

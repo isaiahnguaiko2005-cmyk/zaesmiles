@@ -47,7 +47,7 @@ export default function About() {
                 </div>
               ) : (
                 <Image
-                  src="/mitch.png"
+                  src="/mitch.webp"
                   alt="Mitch, creator of UNMONITORED"
                   fill
                   unoptimized
@@ -62,15 +62,15 @@ export default function About() {
           {/* Text */}
           <div>
             <div className="mb-4">
-              <span
-                className="font-cormorant text-3xl lg:text-4xl font-semibold"
+              <h1
+                className="inline font-cormorant text-3xl lg:text-4xl font-semibold"
                 style={{ color: "var(--ink)" }}
               >
                 Mitch
-              </span>
+              </h1>
               <span
                 className="font-outfit text-sm ml-3"
-                style={{ color: "var(--gold)" }}
+                style={{ color: "var(--gold-deep)" }}
               >
                 @zae.smiles
               </span>

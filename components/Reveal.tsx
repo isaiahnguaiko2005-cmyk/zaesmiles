@@ -19,6 +19,9 @@ export default function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // threshold 0 + a bottom margin, not a percentage of the element: a card
+    // taller than the screen (the UNMONITORED card on mobile) could never get
+    // 15% of itself in view, so it sat invisible until scrolled well past.
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -26,7 +29,7 @@ export default function Reveal({
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -40,8 +43,7 @@ export default function Reveal({
         ...style,
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(18px)",
-        transition: `opacity 400ms ease-out ${delay}ms, transform 400ms ease-out ${delay}ms`,
-        willChange: "opacity, transform",
+        transition: `opacity 500ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform 500ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
       }}
     >
       {children}

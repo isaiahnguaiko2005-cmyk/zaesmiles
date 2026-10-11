@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import Reveal from "./Reveal";
 import SectionSeam from "./SectionSeam";
@@ -10,6 +8,7 @@ const teaserProducts = [
     tag: "Flagship Product",
     description: "A book and 90-day recalibration system for social anxiety.",
     price: "$27+",
+    href: "/products",
   },
   {
     title: "The Mitch Protocol",
@@ -17,6 +16,7 @@ const teaserProducts = [
     description:
       "The complete system for stepping into your most socially confident self, until Mitch is just you.",
     price: "Waitlist open",
+    href: "/waitlist",
   },
 ];
 
@@ -27,7 +27,7 @@ export default function ProductsTeaser() {
       <div className="max-w-5xl mx-auto px-6 lg:px-12">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4 text-center"
-          style={{ color: "var(--sage)" }}
+          style={{ color: "var(--sage-deep)" }}
         >
           Paid Systems
         </span>
@@ -42,20 +42,11 @@ export default function ProductsTeaser() {
           {teaserProducts.map((product, i) => (
             <Reveal key={product.title} delay={i * 60}>
               <Link
-                href="/products"
-                className="p-6 h-full flex flex-col transition-transform duration-200 hover:-translate-y-1"
+                href={product.href}
+                className="card-lift group p-6 h-full flex flex-col"
                 style={{
                   backgroundColor: "var(--ink)",
                   border: "1px solid rgba(196,160,106,0.3)",
-                  transition: "border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "var(--gold)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 28px rgba(196,160,106,0.2)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(196,160,106,0.3)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
                 }}
               >
                 <span
@@ -84,10 +75,10 @@ export default function ProductsTeaser() {
                     {product.price}
                   </span>
                   <span
-                    className="font-outfit text-xs font-medium uppercase tracking-wide"
+                    className="font-outfit text-xs font-medium uppercase tracking-wide transition-transform duration-200 group-hover:translate-x-1"
                     style={{ color: "var(--cream)" }}
                   >
-                    View &rarr;
+                    View&nbsp;&rarr;
                   </span>
                 </div>
               </Link>

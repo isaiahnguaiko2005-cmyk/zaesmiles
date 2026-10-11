@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import guides from "@/data/guides.json";
 import SectionSeam from "./SectionSeam";
 
@@ -15,6 +15,14 @@ const OPTIONS: { label: string; guideId: string }[] = [
 export default function GuideFinderQuiz() {
   const [selected, setSelected] = useState<string | null>(null);
   const result = selected ? guides.find((g) => g.id === selected) : null;
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  // The clicked button disappears with each answer, so move focus to the
+  // heading instead of dropping keyboard and screen-reader users at the top.
+  const choose = (id: string | null) => {
+    setSelected(id);
+    requestAnimationFrame(() => headingRef.current?.focus({ preventScroll: true }));
+  };
 
   return (
     <section className="relative py-20 lg:py-28" style={{ backgroundColor: "var(--cream2)" }}>
@@ -22,12 +30,15 @@ export default function GuideFinderQuiz() {
       <div className="max-w-2xl mx-auto px-6 lg:px-12 text-center">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
-          style={{ color: "var(--sage)" }}
+          style={{ color: "var(--sage-deep)" }}
         >
           Guide Finder
         </span>
         <h2
-          className="font-cormorant font-semibold text-3xl lg:text-4xl mb-4"
+          ref={headingRef}
+          tabIndex={-1}
+          aria-live="polite"
+          className="font-cormorant font-semibold text-3xl lg:text-4xl mb-4 outline-none"
           style={{ color: "var(--ink)" }}
         >
           {result ? "Here's your guide." : "What's actually getting in your way?"}
@@ -46,29 +57,19 @@ export default function GuideFinderQuiz() {
             {OPTIONS.map((opt) => (
               <button
                 key={opt.guideId}
-                onClick={() => setSelected(opt.guideId)}
-                className="p-4 font-outfit text-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] focus:outline-none"
-                style={{
-                  backgroundColor: "var(--ink)",
-                  color: "var(--cream)",
-                  border: "1px solid rgba(196,160,106,0.25)",
-                  minHeight: "48px",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "var(--gold)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(196,160,106,0.25)";
-                }}
-                onFocus={(e) => {
-                  (e.currentTarget as HTMLElement).style.outline = "2px solid var(--gold)";
-                  (e.currentTarget as HTMLElement).style.outlineOffset = "2px";
-                }}
-                onBlur={(e) => {
-                  (e.currentTarget as HTMLElement).style.outline = "none";
-                }}
+                onClick={() => choose(opt.guideId)}
+                type="button"
+                className="quiz-option group flex items-center justify-between gap-4 p-4 font-outfit text-sm text-left active:scale-[0.99]"
+                style={{ minHeight: "52px" }}
               >
-                {opt.label}
+                <span>{opt.label}</span>
+                <span
+                  aria-hidden="true"
+                  className="transition-transform duration-200 group-hover:translate-x-1"
+                  style={{ color: "var(--gold)" }}
+                >
+                 &nbsp;&rarr;
+                </span>
               </button>
             ))}
           </div>
@@ -100,22 +101,16 @@ export default function GuideFinderQuiz() {
                 href={result.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
-                style={{
-                  backgroundColor: "var(--gold)",
-                  color: "var(--ink)",
-                  padding: "14px 28px",
-                  minHeight: "48px",
-                }}
+                className="btn btn-gold"
               >
-                {result.linkLabel} &rarr;
+                {result.linkLabel}&nbsp;&rarr;
               </a>
               <button
-                onClick={() => setSelected(null)}
-                className="story-link font-outfit text-sm font-medium"
-                style={{ color: "rgba(245,240,232,0.6)" }}
+                type="button"
+                onClick={() => choose(null)}
+                className="story-link link-muted font-outfit text-sm font-medium py-2"
               >
-                Try again
+                Pick a different answer
               </button>
             </div>
           </div>

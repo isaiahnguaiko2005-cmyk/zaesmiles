@@ -36,16 +36,34 @@ can pick up without re-deriving context.
   push when done so the two don't silently diverge again like they did
   before this was on GitHub.
 - **Next.js 14 (App Router)** + Tailwind CSS, TypeScript.
-- **Deployed via Vercel CLI** (not GitHub-connected). Project:
+- **Vercel project IS Git-connected to GitHub** (confirmed 2026-09-23 via
+  `vercel git connect`, which reported "already connected," and by watching
+  a `git push origin master` trigger an automatic Production deployment
+  ~12 seconds later, aliased to `https://zaesmiles.vercel.app`). An earlier
+  version of this doc said "not GitHub-connected" — that was wrong/stale,
+  ignore it. **Pushing to `master` alone deploys to production automatically
+  — no `vercel deploy --prod` needed or wanted for normal work.** Project:
   `unmonitored/zaesmiles`. Vercel account: `isaiahnguaiko2005-2428`.
-  - `vercel deploy --yes` → preview URL
-  - `vercel deploy --prod --yes` → production (**always confirm with the
-    user before running this** — treated as a "publish" action every time,
-    even mid-session; the auto-mode classifier will block it without a
-    fresh confirmation regardless of earlier approvals)
+  - Normal flow: branch → push → (optional `vercel deploy --yes` for a
+    manual preview link on that branch) → user approves → merge to
+    `master` → push → production deploy happens on its own.
+  - `vercel deploy --yes` still works for one-off manual preview links
+    (e.g. showing design options before a merge) — this is a Preview
+    deploy, not Production, so it's low-stakes and not confirmation-gated.
+  - Do **not** run `vercel deploy --prod` — it's redundant now that Git
+    auto-deploys `master`, and this session's auto-mode classifier flatly
+    blocks that specific command regardless of user confirmation in chat
+    (learned 2026-09-23: it returns a hard denial, not a permission
+    prompt — don't retry it, there's no chat-based way around it).
   - If a deploy fails with `"Not authorized"`, just retry once before
     assuming auth is broken (happened once, was transient). Check with
     `vercel whoami` if it persists.
+  - `vercel login` needs to be run fresh on a machine that's never
+    authenticated the CLI before (happened on this second laptop). It's a
+    device-code flow (`vercel login`, then visit the printed
+    `vercel.com/oauth/device?user_code=...` URL and confirm) — no
+    password ever passes through Claude, safe to run and just hand the
+    user the URL.
   - `$env:Path` needs the machine+user PATH pulled in manually via
     `[System.Environment]::GetEnvironmentVariable(...)` at the start of each
     PowerShell command — Node/npm/git/vercel were installed via `winget`
@@ -63,6 +81,21 @@ can pick up without re-deriving context.
 
 - Palette: `--ink:#0C0F14 --ink2:#141820 --cream:#F5F0E8 --cream2:#EDE8DC
   --gold:#C4A06A --sage:#8A9E8C` (defined in `app/globals.css`)
+- Text on cream/cream2 uses `--gold-deep:#7A5C2E` / `--sage-deep:#56695A`
+  (also Tailwind `gold-deep` / `sage-deep`). Plain gold/sage text on cream is
+  only ~2–2.6:1 contrast and fails readability; keep them for dark sections,
+  borders, and fills.
+- Shared component classes live in `@layer components` in `globals.css`:
+  `.btn` + `.btn-gold` / `.btn-outline` / `.btn-ink` / `.btn-ink-outline`,
+  `.link-gold` (`.on-light` variant), `.link-cream`, `.link-muted`,
+  `.link-icon`, `.card-lift`, `.nav-link`, `.quiz-option`, `.field-light` /
+  `.field-dark`, `.tabular`. Use these instead of inline `onMouseEnter` /
+  `onFocus` style handlers (all of those were removed 2026-10-11). Focus
+  rings come from one global gold `:focus-visible` rule, so don't add
+  `focus:outline-none`. They must stay inside `@layer components`, or they
+  override Tailwind utilities like `hidden` / `px-8`.
+- Brand SVG icons (Instagram/TikTok/Discord/YouTube/Spotify/check) and the
+  social URLs live once in `components/SocialIcons.tsx`.
 - Fonts: **Cormorant Garamond** (serif, most display headings) + **Outfit**
   (sans, body/UI). Exception: the Hero `<h1>` ("I'm Mitch.") deliberately
   uses **Outfit bold**, not Cormorant — matches mavgpt's sans-serif headline
@@ -93,8 +126,6 @@ can pick up without re-deriving context.
   (bumped because there are 7 nav items now). Mobile menu shows photo + name
   + handle at top, then links, then Instagram/TikTok/Discord icons at the
   bottom.
-- `components/WorkWithMe.tsx` is **dead code** now (superseded by
-  `MediaKit.tsx`), still present but unused — safe to delete.
 
 ## Hero (current state, `components/Hero.tsx`)
 
@@ -154,8 +185,10 @@ figures:
    URLs (not production) sometimes fail to serve embedded `<img>`/`next/image`
    sub-resources due to a Vercel deployment-protection cookie/cache race —
    the file itself is fine (confirmed by navigating to the image URL
-   directly, which always works). `unoptimized` is set on all `mitch.png`
-   `<Image>` usages as a partial mitigation. **Don't panic-debug a blank
+   directly, which always works). `unoptimized` is set on all profile-photo
+   `<Image>` usages as a partial mitigation. On-page photos use
+   `public/mitch.webp` (720px, ~50 KB); `mitch.png` (1.86 MB) is kept only
+   for the OG share image. **Don't panic-debug a blank
    photo on preview** — check production, or navigate to the image URL
    directly to confirm the file is really fine before assuming a code bug.
 2. **Never trust an unauthenticated check** (PowerShell `Invoke-WebRequest`,
