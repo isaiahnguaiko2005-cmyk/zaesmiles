@@ -14,7 +14,9 @@ const config: Config = {
         cream: "#F5F0E8",
         cream2: "#EDE8DC",
         gold: "#C4A06A",
+        "gold-deep": "#7A5C2E",
         sage: "#8A9E8C",
+        "sage-deep": "#56695A",
       },
       fontFamily: {
         cormorant: ["var(--font-cormorant)", "Georgia", "serif"],

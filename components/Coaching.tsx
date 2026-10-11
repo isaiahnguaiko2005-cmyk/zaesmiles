@@ -44,12 +44,12 @@ export default function Coaching() {
         >
           Coming Soon
         </span>
-        <h2
-          className="font-cormorant font-semibold text-3xl lg:text-4xl mb-2"
+        <h1
+          className="font-cormorant font-semibold text-4xl lg:text-5xl mb-2"
           style={{ color: "var(--cream)" }}
         >
           Coaching
-        </h2>
+        </h1>
         <p
           className="font-outfit font-light mb-12"
           style={{ color: "rgba(245,240,232,0.45)" }}

@@ -77,19 +77,11 @@ export default function WaitlistForm({
           placeholder="your@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="flex-1 font-outfit text-sm px-4 focus:outline-none"
-          style={{
-            minHeight: "48px",
-            backgroundColor: "rgba(245,240,232,0.06)",
-            border: "1px solid rgba(196,160,106,0.4)",
-            color: "var(--cream)",
-          }}
-          onFocus={(e) => {
-            e.currentTarget.style.borderColor = "var(--gold)";
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.borderColor = "rgba(196,160,106,0.4)";
-          }}
+          spellCheck={false}
+          aria-invalid={status === "error" || undefined}
+          aria-describedby={status === "error" ? `waitlist-error-${source}` : undefined}
+          className="field-dark flex-1 font-outfit text-base sm:text-sm px-4"
+          style={{ minHeight: "48px" }}
         />
         {/* honeypot: real visitors never see or fill this */}
         <input
@@ -105,24 +97,9 @@ export default function WaitlistForm({
         <button
           type="submit"
           disabled={status === "sending"}
-          className="font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97] focus:outline-none"
-          style={{
-            backgroundColor: "var(--gold)",
-            color: "var(--ink)",
-            padding: "14px 24px",
-            minHeight: "48px",
-            border: "1px solid var(--gold)",
-            opacity: status === "sending" ? 0.7 : 1,
-          }}
-          onFocus={(e) => {
-            e.currentTarget.style.outline = "2px solid var(--gold)";
-            e.currentTarget.style.outlineOffset = "3px";
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.outline = "none";
-          }}
+          className="btn btn-gold"
         >
-          {status === "sending" ? "Joining..." : "Join the waitlist"}
+          {status === "sending" ? "Joining…" : "Join the waitlist"}
         </button>
       </div>
       <p
@@ -132,7 +109,7 @@ export default function WaitlistForm({
         By joining you agree to get emails about The Mitch Protocol and related free guides. Unsubscribe anytime.
       </p>
       {status === "error" && (
-        <p role="alert" className="font-outfit text-xs mt-2" style={{ color: "#e8a598" }}>
+        <p id={`waitlist-error-${source}`} role="alert" className="font-outfit text-xs mt-2" style={{ color: "#e8a598" }}>
           {message}
         </p>
       )}

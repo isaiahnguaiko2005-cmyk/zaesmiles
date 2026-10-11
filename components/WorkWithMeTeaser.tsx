@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import Reveal from "./Reveal";
 import BrandMarquee from "./BrandMarquee";
@@ -11,7 +9,7 @@ export default function WorkWithMeTeaser() {
       <Reveal className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
-          style={{ color: "var(--sage)" }}
+          style={{ color: "var(--sage-deep)" }}
         >
           For Brands
         </span>
@@ -32,32 +30,20 @@ export default function WorkWithMeTeaser() {
         <div className="flex flex-wrap justify-center gap-4 mb-14">
           <Link
             href="/partnerships"
-            className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
-            style={{
-              backgroundColor: "var(--ink)",
-              color: "var(--cream)",
-              padding: "14px 28px",
-              minHeight: "48px",
-            }}
+            className="btn btn-ink"
           >
-            View Media Kit &rarr;
+            View Media Kit&nbsp;&rarr;
           </Link>
           <a
             href="mailto:isaiahnguaiko6@gmail.com"
-            className="inline-flex items-center justify-center font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
-            style={{
-              border: "1px solid var(--ink)",
-              color: "var(--ink)",
-              padding: "14px 28px",
-              minHeight: "48px",
-            }}
+            className="btn btn-ink-outline"
           >
             Get in Touch
           </a>
         </div>
         <span
           className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
-          style={{ color: "rgba(12,15,20,0.4)" }}
+          style={{ color: "rgba(12,15,20,0.55)" }}
         >
           Brand Partners
         </span>

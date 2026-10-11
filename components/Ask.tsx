@@ -83,11 +83,11 @@ export default function Ask() {
           <div>
             <span
               className="font-outfit text-xs uppercase tracking-widest font-medium block mb-4"
-              style={{ color: "var(--gold)" }}
+              style={{ color: "var(--gold-deep)" }}
             >
               {copy.eyebrow}
             </span>
-            <h2
+            <h1
               className="font-cormorant font-semibold mb-6"
               style={{
                 color: "var(--ink)",
@@ -96,7 +96,7 @@ export default function Ask() {
               }}
             >
               {copy.heading}
-            </h2>
+            </h1>
             <p
               className="font-outfit font-light leading-relaxed"
               style={{ color: "rgba(12,15,20,0.7)", fontSize: "1rem" }}
@@ -128,19 +128,13 @@ export default function Ask() {
                     role="tab"
                     aria-selected={active}
                     onClick={() => switchMode(m)}
-                    className="flex-1 font-outfit text-sm font-medium uppercase tracking-wide transition-all duration-200 active:scale-[0.97] focus:outline-none"
+                    type="button"
+                    className="flex-1 font-outfit text-sm font-medium uppercase tracking-wide transition-colors duration-200 active:scale-[0.97]"
                     style={{
                       backgroundColor: active ? "var(--gold)" : "transparent",
                       color: active ? "var(--ink)" : "rgba(245,240,232,0.6)",
                       padding: "10px 12px",
                       minHeight: "44px",
-                    }}
-                    onFocus={(e) => {
-                      (e.currentTarget as HTMLElement).style.outline = "2px solid var(--gold)";
-                      (e.currentTarget as HTMLElement).style.outlineOffset = "2px";
-                    }}
-                    onBlur={(e) => {
-                      (e.currentTarget as HTMLElement).style.outline = "none";
                     }}
                   >
                     {m === "Podcast" ? "Podcast Question" : "Advice Question"}
@@ -165,10 +159,10 @@ export default function Ask() {
                 </p>
                 <button
                   onClick={() => setStatus("idle")}
-                  className="mt-6 font-outfit text-sm font-medium uppercase tracking-wide focus:outline-none"
-                  style={{ color: "var(--gold)" }}
+                  type="button"
+                  className="link-gold mt-6 font-outfit text-sm font-medium uppercase tracking-wide min-h-[44px]"
                 >
-                  Submit another question →
+                  Submit another question&nbsp;&rarr;
                 </button>
               </div>
             ) : (
@@ -189,19 +183,8 @@ export default function Ask() {
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   placeholder={copy.placeholder}
-                  className="w-full font-outfit font-light text-sm p-4 mb-4 focus:outline-none"
-                  style={{
-                    backgroundColor: "var(--ink2)",
-                    color: "var(--cream)",
-                    border: "1px solid rgba(245,240,232,0.2)",
-                    resize: "vertical",
-                  }}
-                  onFocus={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "var(--gold)";
-                  }}
-                  onBlur={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(245,240,232,0.2)";
-                  }}
+                  className="field-dark w-full font-outfit font-light text-base sm:text-sm p-4 mb-4"
+                  style={{ resize: "vertical" }}
                 />
 
                 <label
@@ -218,18 +201,8 @@ export default function Ask() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="So I can shout you out"
-                  className="w-full font-outfit font-light text-sm p-4 mb-6 focus:outline-none"
-                  style={{
-                    backgroundColor: "var(--ink2)",
-                    color: "var(--cream)",
-                    border: "1px solid rgba(245,240,232,0.2)",
-                  }}
-                  onFocus={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "var(--gold)";
-                  }}
-                  onBlur={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(245,240,232,0.2)";
-                  }}
+                  autoComplete="nickname"
+                  className="field-dark w-full font-outfit font-light text-base sm:text-sm p-4 mb-6"
                 />
 
                 {status === "error" && (
@@ -245,21 +218,7 @@ export default function Ask() {
                 <button
                   type="submit"
                   disabled={status === "submitting" || question.trim().length < 3}
-                  className="w-full inline-flex items-center justify-center gap-2 font-outfit font-medium text-sm uppercase tracking-wider transition-all duration-200 active:scale-[0.97] focus:outline-none disabled:opacity-50 disabled:active:scale-100"
-                  style={{
-                    backgroundColor: "var(--gold)",
-                    color: "var(--ink)",
-                    padding: "14px 28px",
-                    minHeight: "48px",
-                    border: "1px solid var(--gold)",
-                  }}
-                  onFocus={(e) => {
-                    (e.currentTarget as HTMLElement).style.outline = "2px solid var(--gold)";
-                    (e.currentTarget as HTMLElement).style.outlineOffset = "3px";
-                  }}
-                  onBlur={(e) => {
-                    (e.currentTarget as HTMLElement).style.outline = "none";
-                  }}
+                  className="btn btn-gold w-full gap-2"
                 >
                   {status === "submitting" && (
                     <svg
@@ -274,7 +233,7 @@ export default function Ask() {
                       <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
                     </svg>
                   )}
-                  {status === "submitting" ? "Sending..." : copy.button}
+                  {status === "submitting" ? "Sending…" : copy.button}
                 </button>
               </form>
             )}
