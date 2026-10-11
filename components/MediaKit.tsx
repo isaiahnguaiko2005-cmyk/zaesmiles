@@ -412,7 +412,7 @@ export default function MediaKit() {
           </span>
           <a
             href="mailto:isaiahnguaiko6@gmail.com"
-            className="link-cream font-cormorant font-semibold inline-block mb-8 break-all"
+            className="link-cream font-cormorant font-semibold block w-fit mx-auto mb-8 break-all"
             style={{ fontSize: "clamp(1.35rem, 3.5vw, 2rem)" }}
           >
             isaiahnguaiko6@gmail.com
