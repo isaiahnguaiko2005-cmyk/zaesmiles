@@ -10,6 +10,7 @@ import FoundingPrice from "./FoundingPrice";
 import { CheckIcon } from "./SocialIcons";
 import {
   FOUNDING_PERCENT_OFF,
+  PRICE_PUBLIC,
   LAUNCH_LABEL,
   PROTOCOL_INCLUDES,
   WAITLIST_JOIN_PATH,
@@ -126,7 +127,7 @@ export default function Products() {
             >
               Waitlist open
             </span>
-            The Mitch Protocol launches {LAUNCH_LABEL}. Waitlist members get {FOUNDING_PERCENT_OFF}% off.
+            The Mitch Protocol launches {LAUNCH_LABEL}. {PRICE_PUBLIC ? <>Waitlist members get {FOUNDING_PERCENT_OFF}% off.</> : <>The waitlist gets it first.</>}
           </span>
           <span
             className="font-outfit text-sm font-medium uppercase tracking-wide transition-transform duration-200 group-hover:translate-x-1"
