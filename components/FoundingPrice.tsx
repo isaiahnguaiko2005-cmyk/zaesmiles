@@ -1,8 +1,24 @@
-import { FOUNDING_PERCENT_OFF, FOUNDING_PRICE, REGULAR_PRICE } from "@/lib/launch";
+import { FOUNDING_PERCENT_OFF, FOUNDING_PRICE, LAUNCH_LABEL, PRICE_PUBLIC, REGULAR_PRICE } from "@/lib/launch";
 
 /** Regular price struck through, founding price, and the shimmering "% off" badge. */
 export default function FoundingPrice({ size = "md" }: { size?: "md" | "lg" }) {
   const big = size === "lg";
+  if (!PRICE_PUBLIC) {
+    return (
+      <div className={`flex items-center flex-wrap ${big ? "gap-4 justify-center" : "gap-3"}`}>
+        <span
+          className="badge-shimmer font-outfit font-medium uppercase tracking-widest px-3 py-1"
+          style={{
+            backgroundColor: "var(--gold)",
+            color: "var(--ink)",
+            fontSize: big ? "0.8rem" : "0.7rem",
+          }}
+        >
+          Waitlist-only price &middot; revealed by email {LAUNCH_LABEL}
+        </span>
+      </div>
+    );
+  }
   return (
     <div className={`flex items-center flex-wrap ${big ? "gap-4 justify-center" : "gap-3"}`}>
       <span

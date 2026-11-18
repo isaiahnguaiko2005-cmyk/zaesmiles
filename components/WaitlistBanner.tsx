@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LaunchCountdownInline } from "./LaunchCountdown";
-import { FOUNDING_PERCENT_OFF, LAUNCH_LABEL, WAITLIST_JOIN_PATH } from "@/lib/launch";
+import { FOUNDING_PERCENT_OFF, LAUNCH_LABEL, PRICE_PUBLIC, WAITLIST_JOIN_PATH } from "@/lib/launch";
 
 /** Slim announcement strip for the top of the homepage, sitting just under the fixed nav. */
 export default function WaitlistBanner() {
@@ -19,7 +19,7 @@ export default function WaitlistBanner() {
           &middot;
         </span>
         <span>
-          {FOUNDING_PERCENT_OFF}% off founding price &middot; launches {LAUNCH_LABEL}{" "}
+          {PRICE_PUBLIC ? <>{FOUNDING_PERCENT_OFF}% off founding price</> : <>waitlist-only price</>} &middot; launches {LAUNCH_LABEL}{" "}
           <LaunchCountdownInline />
         </span>
         <span className="font-medium underline underline-offset-2">Join&nbsp;&rarr;</span>

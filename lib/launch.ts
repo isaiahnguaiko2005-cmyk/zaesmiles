@@ -6,6 +6,12 @@ export const LAUNCH_AT = "2026-12-01T09:00:00-05:00";
 export const LAUNCH_LABEL = "Dec 1";
 export const LAUNCH_TIME_LABEL = "9:00 AM Eastern";
 
+/**
+ * Pre-launch rule: the waitlist price is never shown publicly. It is revealed
+ * only in the Dec 1 launch emails. Flip to true when the cart opens.
+ */
+export const PRICE_PUBLIC = false;
+
 export const FOUNDING_PRICE = 24;
 export const REGULAR_PRICE = 32;
 export const FOUNDING_PERCENT_OFF = Math.round(

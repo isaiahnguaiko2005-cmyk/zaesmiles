@@ -8,6 +8,7 @@ import {
   LAUNCH_LABEL,
   PROTOCOL_PARTS,
   PROTOCOL_TERMS,
+  PRICE_PUBLIC,
   REGULAR_PRICE,
 } from "@/lib/launch";
 
@@ -92,7 +93,9 @@ export default function WaitlistPage() {
               className="font-outfit font-light text-sm mt-3"
               style={{ color: "rgba(245,240,232,0.6)" }}
             >
-              Waitlist members get {FOUNDING_WINDOW_DAYS} days from launch to claim the founding price. Your link arrives by email on launch day. After that it&apos;s ${REGULAR_PRICE}.
+              {PRICE_PUBLIC
+                ? <>Waitlist members get {FOUNDING_WINDOW_DAYS} days from launch to claim the founding price. Your link arrives by email on launch day. After that it&apos;s ${REGULAR_PRICE}.</>
+                : <>The waitlist gets it first, at a price that isn&apos;t posted anywhere. Your link and the price arrive by email on launch day, and it only lasts a few days.</>}
             </p>
           </div>
 
